@@ -13,23 +13,24 @@
     <style>
         /* --- 1. ZMIENNE I KONFIGURACJA --- */
         :root {
-            --bg-deep: #080808;
-            --bg-panel: #121212;
-            --bg-card: #1a1a1a;
+            --bg-deep: #050505;
+            --bg-panel: #111111;
+            --bg-card: #161616;
             
-            /* Kolory Akcentowe */
-            --accent-orange: #ff4500;   /* MVP / Główny */
-            --accent-blue: #00a8ff;     /* Obrona */
-            --accent-purple: #bf00ff;   /* Atak */
-            --accent-yellow: #ffd700;   /* Ostrzeżenia / Niepewne */
-            --accent-red: #ff2e2e;      /* Krytyczne */
-            --accent-teal: #00ffcc;     /* Wojownik */
+            /* Akcenty */
+            --accent-orange: #ff4500;
+            --accent-blue: #00a8ff;
+            --accent-purple: #bf00ff;
+            --accent-yellow: #ffd700; /* Kolor Zagrożenia */
+            --accent-red: #ff2e2e;
+            --accent-teal: #00ffcc;
             
             /* UI */
             --border-color: #333;
-            --radius-lg: 24px;
-            --radius-md: 16px;
-            --radius-sm: 8px;
+            --radius-lg: 30px;
+            --radius-md: 20px;
+            --radius-sm: 10px;
+            --shadow-glow: 0 0 25px rgba(255, 69, 0, 0.3);
             
             --font-head: 'Teko', sans-serif;
             --font-body: 'Barlow', sans-serif;
@@ -45,120 +46,135 @@
             
             /* Matowy Carbon Pattern */
             background-image: 
-                linear-gradient(45deg, #0f0f0f 25%, transparent 25%, transparent 75%, #0f0f0f 75%, #0f0f0f),
-                linear-gradient(45deg, #0f0f0f 25%, transparent 25%, transparent 75%, #0f0f0f 75%, #0f0f0f);
+                linear-gradient(45deg, #0a0a0a 25%, transparent 25%, transparent 75%, #0a0a0a 75%, #0a0a0a),
+                linear-gradient(45deg, #0a0a0a 25%, transparent 25%, transparent 75%, #0a0a0a 75%, #0a0a0a);
             background-position: 0 0, 10px 10px;
             background-size: 20px 20px;
         }
 
         .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
-        section { padding: 60px 0; }
+        section { padding: 70px 0; position: relative; }
 
         h1, h2, h3, h4 { font-family: var(--font-head); text-transform: uppercase; line-height: 1; letter-spacing: 1px; margin: 0; }
 
         /* --- 2. HEADER --- */
         header {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-            background: rgba(8, 8, 8, 0.95);
-            backdrop-filter: blur(15px);
+            background: rgba(5, 5, 5, 0.9);
+            backdrop-filter: blur(20px);
             border-bottom: 1px solid #333;
             padding: 15px 0;
             border-bottom-left-radius: var(--radius-lg);
             border-bottom-right-radius: var(--radius-lg);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         .navbar { display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 2rem; font-weight: 700; letter-spacing: 2px; }
-        .logo span { color: var(--accent-orange); }
+        .logo span { color: var(--accent-orange); text-shadow: 0 0 10px rgba(255,69,0,0.4); }
 
         .nav-links { display: flex; gap: 25px; list-style: none; }
-        .nav-links a { font-size: 1.1rem; font-weight: 600; color: #888; padding: 6px 16px; border-radius: 50px; transition: 0.3s; }
-        .nav-links a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+        .nav-links a { font-size: 1.1rem; font-weight: 600; color: #888; padding: 8px 20px; border-radius: 50px; transition: 0.3s; }
+        .nav-links a:hover { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid #333; }
 
-        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
-        .hamburger .bar { width: 28px; height: 3px; background: var(--accent-orange); border-radius: 3px; }
+        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 6px; }
+        .hamburger .bar { width: 30px; height: 3px; background: var(--accent-orange); border-radius: 3px; }
 
-        /* --- 3. HERO --- */
+        /* --- 3. HERO (FIX BUTTON GLOW) --- */
         #hero {
-            min-height: 85vh; display: flex; align-items: center; justify-content: center; text-align: center;
-            background: radial-gradient(circle, rgba(255,69,0,0.06) 0%, transparent 70%);
+            min-height: 90vh; display: flex; align-items: center; justify-content: center; text-align: center;
+            background: radial-gradient(circle, rgba(255,69,0,0.05) 0%, transparent 60%);
             padding-top: 80px;
         }
+        .hero-content { padding-bottom: 60px; /* Miejsce na cień przycisku */ }
+
         .hero-tag { 
             border: 1px solid var(--accent-orange); color: var(--accent-orange); 
-            padding: 6px 15px; border-radius: 50px; font-weight: 700; font-size: 0.9rem; display: inline-block; margin-bottom: 15px;
+            padding: 8px 20px; border-radius: 50px; font-weight: 700; font-size: 0.9rem; display: inline-block; margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(255,69,0,0.1);
         }
-        #hero h1 { font-size: 5rem; font-weight: 500; line-height: 0.9; margin-bottom: 20px; }
+        #hero h1 { font-size: 5.5rem; font-weight: 500; line-height: 0.9; margin-bottom: 25px; }
         .outline { -webkit-text-stroke: 1px #fff; color: transparent; font-weight: 700; }
         
+        /* Przycisk z poprawionym cieniem */
         .btn-primary {
-            display: inline-block; padding: 15px 40px; background: var(--accent-orange); color: #000;
-            font-family: var(--font-head); font-size: 1.5rem; font-weight: 700; margin-top: 25px;
-            border-radius: 50px; box-shadow: 0 10px 30px rgba(255,69,0,0.25);
+            display: inline-block; padding: 18px 50px; background: var(--accent-orange); color: #000;
+            font-family: var(--font-head); font-size: 1.6rem; font-weight: 700; margin-top: 30px;
+            border-radius: 50px; 
+            box-shadow: 0 0 30px rgba(255, 69, 0, 0.4), 0 0 10px rgba(255, 69, 0, 0.8); /* Realistyczny glow */
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            border: 2px solid var(--accent-orange);
         }
-        .btn-primary:hover { background: #fff; transform: translateY(-5px); }
+        .btn-primary:hover { 
+            background: transparent; color: var(--accent-orange); 
+            box-shadow: 0 0 50px rgba(255, 69, 0, 0.6), inset 0 0 20px rgba(255, 69, 0, 0.2);
+            transform: scale(1.05);
+        }
 
         /* --- 4. ARENY --- */
-        .section-header { text-align: center; margin-bottom: 40px; }
-        .section-header h2 { font-size: 3.5rem; }
-        .divider { width: 60px; height: 5px; background: var(--accent-orange); margin: 10px auto; border-radius: 10px; }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-header h2 { font-size: 3.5rem; text-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .divider { width: 80px; height: 4px; background: var(--accent-orange); margin: 15px auto; border-radius: 10px; box-shadow: 0 0 10px rgba(255,69,0,0.5); }
 
-        .arenas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; }
+        .arenas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
         .arena-box {
-            background: var(--bg-panel); border: 1px solid var(--border-color); padding: 20px; text-align: center;
+            background: var(--bg-panel); border: 1px solid var(--border-color); padding: 25px; text-align: center;
             border-radius: var(--radius-md); transition: 0.3s;
         }
-        .arena-box:hover { transform: translateY(-5px); border-color: var(--accent-orange); background: #222; }
+        .arena-box:hover { transform: translateY(-5px); border-color: var(--accent-orange); background: #181818; }
         .main-arena { 
             grid-column: span 2; background: linear-gradient(135deg, #1a1a1a, #0e0e0e); 
             border: 1px solid var(--accent-orange); box-shadow: 0 5px 20px rgba(255,69,0,0.1);
         }
-        .arena-box .icon { font-size: 2rem; margin-bottom: 10px; display: block; }
-        .retired { opacity: 0.3; border-style: dashed; }
+        .arena-box .icon { font-size: 2.2rem; margin-bottom: 10px; display: block; }
+        .retired { opacity: 0.3; border-style: dashed; filter: grayscale(1); }
 
-        /* --- 5. SKŁAD --- */
+        /* --- 5. SKŁAD (BOISKO I KARTY) --- */
         .alert-banner {
-            background: rgba(255,69,0,0.1); border: 1px solid var(--accent-orange); border-radius: var(--radius-md);
-            padding: 15px; margin-bottom: 30px; text-align: center; color: var(--accent-orange); font-weight: 600;
+            background: rgba(255,215,0,0.05); border: 1px solid var(--accent-yellow); border-radius: var(--radius-md);
+            padding: 15px; margin-bottom: 40px; text-align: center; color: var(--accent-yellow); font-weight: 600;
+            letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem;
         }
 
-        .squad-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 30px; }
+        .squad-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; }
 
-        /* Boisko */
-        .field-zone { position: relative; width: 100%; height: 500px; }
+        /* Responsywne Boisko */
+        .field-zone { position: relative; width: 100%; height: 550px; }
         .rink-matte {
-            width: 100%; height: 100%; background: #161616; border: 3px solid #333;
-            border-radius: 40px; position: relative; overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            width: 100%; height: 100%; background: #121212; border: 4px solid #333;
+            border-radius: 50px; position: relative; overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.7);
         }
-        .rink-lines { position: absolute; top: 50%; width: 100%; height: 2px; background: #444; transform: translateY(-50%); }
+        .rink-lines { position: absolute; top: 50%; width: 100%; height: 2px; background: #333; transform: translateY(-50%); }
         .crease {
             position: absolute; width: 80px; height: 40px; left: 50%; transform: translateX(-50%);
             border: 2px solid var(--accent-orange); background: rgba(255,69,0,0.1);
         }
-        .crease.top { top: 0; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; border-top: none; }
-        .crease.bottom { bottom: 0; border-top-left-radius: 25px; border-top-right-radius: 25px; border-bottom: none; }
+        .crease.top { top: 0; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; border-top: none; }
+        .crease.bottom { bottom: 0; border-top-left-radius: 30px; border-top-right-radius: 30px; border-bottom: none; }
 
         /* Kropki */
         .dot {
-            position: absolute; width: 45px; height: 45px;
+            position: absolute; width: 48px; height: 48px;
             background: #222; border: 2px solid #fff; border-radius: 50%;
             display: flex; justify-content: center; align-items: center;
-            font-family: var(--font-head); font-size: 1.4rem; font-weight: 700; color: #fff;
+            font-family: var(--font-head); font-size: 1.5rem; font-weight: 700; color: #fff;
             transform: translate(-50%, -50%); cursor: pointer; z-index: 10; transition: 0.3s;
             box-shadow: 0 5px 15px rgba(0,0,0,0.6);
         }
         .dot:hover { transform: translate(-50%, -50%) scale(1.2); z-index: 20; }
 
-        /* Warianty kolorystyczne kropek */
+        /* Kolory Kropek */
         .dot-mvp { border-color: var(--accent-orange); color: var(--accent-orange); }
-        .dot-mvp:hover { background: var(--accent-orange); color: #000; }
+        .dot-mvp:hover { background: var(--accent-orange); color: #000; box-shadow: 0 0 20px var(--accent-orange); }
         
         .dot-skill { border-color: var(--accent-purple); color: var(--accent-purple); }
         .dot-skill:hover { background: var(--accent-purple); color: #fff; }
 
         .dot-warn { border-color: var(--accent-yellow); color: var(--accent-yellow); }
-        .dot-warn:hover { background: var(--accent-yellow); color: #000; }
+        .dot-warn:hover { background: var(--accent-yellow); color: #000; box-shadow: 0 0 20px var(--accent-yellow); }
         
         .dot-teal { border-color: var(--accent-teal); color: var(--accent-teal); }
         .dot-teal:hover { background: var(--accent-teal); color: #000; }
@@ -166,7 +182,7 @@
         .pos-gk { top: 90%; left: 50%; border-radius: 8px; width: 45px; height: 25px; font-size: 1rem; background: #000; border-color: #444; cursor: default; }
         .pos-ld { top: 70%; left: 25%; }
         .pos-rd { top: 70%; left: 75%; }
-        .pos-c  { top: 50%; left: 50%; width: 60px; height: 60px; font-size: 1.8rem; background: #1a1a1a; }
+        .pos-c  { top: 50%; left: 50%; width: 65px; height: 65px; font-size: 2rem; background: #161616; }
         .pos-la { top: 25%; left: 25%; }
         .pos-ra { top: 25%; left: 75%; }
 
@@ -178,13 +194,13 @@
             border-radius: var(--radius-md); position: relative; overflow: hidden;
             transition: 0.3s; scroll-margin-top: 120px;
         }
-        .player-card:hover { transform: translateX(5px); border-color: #666; }
-        .player-card.highlight { transform: scale(1.02); box-shadow: 0 0 30px rgba(255,255,255,0.1); z-index: 5; }
+        .player-card:hover { transform: translateX(5px); border-color: #666; background: #202020; }
+        .player-card.highlight { transform: scale(1.02); box-shadow: 0 0 30px rgba(255,255,255,0.15); z-index: 5; border-color: #fff; }
 
-        /* Style Kart */
+        /* Style Kolorystyczne Kart */
         .style-mvp { border-left: 4px solid var(--accent-orange); }
         .style-mvp h3 { color: var(--accent-orange); }
-        .style-mvp .progress-fill { background: var(--accent-orange); }
+        .style-mvp .progress-fill { background: var(--accent-orange); box-shadow: 0 0 10px var(--accent-orange); }
         
         .style-skill { border-left: 4px solid var(--accent-purple); }
         .style-skill h3 { color: var(--accent-purple); }
@@ -192,65 +208,70 @@
         
         .style-warn { border-left: 4px solid var(--accent-yellow); }
         .style-warn h3 { color: var(--accent-yellow); }
+        .style-warn .progress-fill { background: var(--accent-yellow); }
         
         .style-teal { border-left: 4px solid var(--accent-teal); }
         .style-teal h3 { color: var(--accent-teal); }
 
-        .card-content { padding: 20px; display: flex; align-items: center; gap: 20px; }
-        .card-num { font-family: var(--font-head); font-size: 3.5rem; font-weight: 700; color: #333; line-height: 0.8; }
+        .card-content { padding: 25px; display: flex; align-items: center; gap: 25px; }
+        .card-num { font-family: var(--font-head); font-size: 4rem; font-weight: 700; color: #333; line-height: 0.8; }
         .style-mvp .card-num { color: var(--accent-orange); opacity: 0.8; }
         
         .card-info { flex: 1; min-width: 0; }
-        .card-info h3 { font-size: 1.4rem; margin-bottom: 5px; }
-        .card-info p { font-size: 0.95rem; color: #aaa; line-height: 1.4; word-wrap: break-word; }
+        .card-info h3 { font-size: 1.6rem; margin-bottom: 8px; color: #fff; }
+        .card-info p { font-size: 1rem; color: #aaa; line-height: 1.5; word-wrap: break-word; }
         
-        .stat-bar { margin-top: 10px; }
-        .stat-label { font-size: 0.7rem; color: #666; font-weight: 700; display: block; margin-bottom: 3px; }
-        .progress-track { width: 100%; height: 6px; background: #333; border-radius: 10px; }
-        .progress-fill { height: 100%; border-radius: 10px; background: #fff; }
+        .stat-bar { margin-top: 12px; }
+        .stat-label { font-size: 0.75rem; color: #777; font-weight: 700; display: block; margin-bottom: 4px; }
+        .progress-track { width: 100%; height: 6px; background: #2a2a2a; border-radius: 10px; }
+        .progress-fill { height: 100%; border-radius: 10px; }
 
-        /* --- 6. HIERARCHIA --- */
+        /* --- 6. HIERARCHIA (MATRYCA) --- */
         .matrix-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px;
         }
         .matrix-col {
             background: var(--bg-panel); border: 1px solid var(--border-color);
-            border-radius: var(--radius-md); padding: 25px;
+            border-radius: var(--radius-md); padding: 30px; display: flex; flex-direction: column;
         }
         .col-full { grid-column: 1 / -1; }
         
-        .col-head { font-family: var(--font-head); font-size: 1.5rem; border-bottom: 2px solid #333; margin-bottom: 20px; color: #ccc; }
+        .col-head { font-family: var(--font-head); font-size: 1.6rem; border-bottom: 2px solid #333; margin-bottom: 25px; color: #ccc; }
 
         /* Sloty */
         .h-slot {
-            background: #0e0e0e; padding: 12px; margin-bottom: 10px; border-radius: var(--radius-sm);
+            background: #0e0e0e; padding: 15px; margin-bottom: 12px; border-radius: var(--radius-sm);
             display: flex; align-items: center; gap: 15px; border: 1px solid #222;
         }
-        .h-slot.primary { border-left: 4px solid var(--accent-blue); }
-        .h-slot.unstable { border-left: 4px solid var(--accent-yellow); }
         
-        .equal-row { display: flex; gap: 10px; }
-        .h-slot.equal { flex: 1; border-left: 4px solid #555; }
-
+        /* Kolory Slotów */
+        .h-slot.unstable { border-left: 4px solid var(--accent-yellow); } /* Zagrożony */
+        .h-slot.equal { border-left: 4px solid #666; }
+        
         .h-badge { 
-            font-family: var(--font-head); font-size: 1.6rem; width: 35px; text-align: center; color: #fff; 
-            background: #222; border-radius: 5px; line-height: 1.6rem; padding-top: 2px;
+            font-family: var(--font-head); font-size: 1.8rem; width: 40px; text-align: center; color: #fff; 
+            background: #222; border-radius: 6px; line-height: 1.8rem; padding-top: 4px;
         }
+        .unstable .h-badge { color: var(--accent-yellow); }
+
         .h-desc { flex: 1; }
-        .h-desc strong { display: block; font-size: 0.9rem; color: #fff; }
-        .h-desc small { font-size: 0.75rem; color: #777; }
+        .h-desc strong { display: block; font-size: 1rem; color: #fff; margin-bottom: 2px; }
+        .h-desc small { font-size: 0.8rem; color: #777; }
+        .unstable .h-desc strong { color: var(--accent-yellow); }
 
-        .future-note { text-align: center; color: #555; font-size: 0.8rem; margin-top: 15px; font-style: italic; }
-
-        /* Zasoby */
-        .res-card { background: #0f0f0f; padding: 15px; border-radius: var(--radius-sm); margin-bottom: 10px; border: 1px solid #252525; }
-        .res-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px solid #222; padding-bottom: 5px; }
-        .res-head strong { font-size: 1.2rem; font-family: var(--font-head); }
+        .future-note { text-align: center; color: #555; font-size: 0.85rem; margin-top: auto; padding-top: 20px; font-style: italic; border-top: 1px dashed #222; }
         
-        .status-ok { color: var(--accent-blue); font-weight: 700; font-size: 0.8rem; }
-        .status-bad { color: var(--accent-red); font-weight: 700; font-size: 0.8rem; }
-        .res-card p { font-size: 0.85rem; color: #999; line-height: 1.4; }
-        .res-card.critical { border-left: 3px solid var(--accent-red); }
+        .divider-arrow { text-align: center; font-size: 1.5rem; color: #444; margin: 10px 0; }
+
+        /* Rezerwa */
+        .res-card { background: #0f0f0f; padding: 20px; border-radius: var(--radius-sm); margin-bottom: 15px; border: 1px solid #252525; }
+        .res-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid #222; padding-bottom: 8px; }
+        .res-head strong { font-size: 1.4rem; font-family: var(--font-head); color: #fff; }
+        
+        .status-ok { color: var(--accent-blue); font-weight: 700; font-size: 0.85rem; background: rgba(0, 168, 255, 0.1); padding: 2px 8px; border-radius: 4px; }
+        .status-bad { color: var(--accent-red); font-weight: 700; font-size: 0.85rem; background: rgba(255, 46, 46, 0.1); padding: 2px 8px; border-radius: 4px; }
+        .res-card p { font-size: 0.9rem; color: #999; line-height: 1.5; }
+        .res-card.critical { border-left: 4px solid var(--accent-red); }
 
         /* --- 7. SKLEP --- */
         .shop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
@@ -260,42 +281,44 @@
         }
         .shop-item:hover { border-color: var(--accent-orange); transform: translateY(-5px); }
         .item-vis {
-            height: 200px; background: #111; display: flex; align-items: center; justify-content: center;
-            font-family: var(--font-head); font-size: 3rem; font-weight: 700; color: #222; letter-spacing: 5px;
+            height: 220px; background: #111; display: flex; align-items: center; justify-content: center;
+            font-family: var(--font-head); font-size: 3.5rem; font-weight: 700; color: #222; letter-spacing: 5px;
         }
         .vis-home { background: linear-gradient(135deg, #000, #222); }
         .vis-away { background: linear-gradient(135deg, #222, #444); }
         .vis-gk { background: linear-gradient(135deg, #001100, #002200); }
-        .item-info { padding: 20px; text-align: center; }
-        .price { color: var(--accent-orange); font-weight: 700; font-size: 1.2rem; display: block; margin: 5px 0 15px 0; }
+        
+        .item-info { padding: 25px; text-align: center; }
+        .price { color: var(--accent-orange); font-weight: 700; font-size: 1.4rem; display: block; margin: 5px 0 20px 0; }
         .btn-shop {
-            width: 100%; background: transparent; border: 1px solid #444; color: #fff; padding: 10px; 
-            border-radius: var(--radius-lg); cursor: pointer; font-weight: 600; transition: 0.2s;
+            width: 100%; background: transparent; border: 1px solid #444; color: #fff; padding: 12px; 
+            border-radius: 50px; cursor: pointer; font-weight: 600; transition: 0.2s; font-family: var(--font-head); font-size: 1.2rem;
         }
         .btn-shop:hover { background: var(--accent-orange); border-color: var(--accent-orange); color: #000; }
 
         /* --- 8. HISTORIA --- */
         .history-box {
-            border: 1px solid var(--accent-red); background: rgba(255, 46, 46, 0.05); padding: 30px;
-            border-radius: var(--radius-md); display: flex; align-items: center; gap: 30px;
+            border: 1px solid var(--accent-red); background: rgba(255, 46, 46, 0.05); padding: 40px;
+            border-radius: var(--radius-md); display: flex; align-items: center; gap: 40px;
         }
-        .h-score { font-family: var(--font-head); font-size: 5rem; color: var(--accent-red); line-height: 1; }
-        .memorial { margin-top: 15px; padding-left: 15px; border-left: 3px solid #fff; font-size: 0.9rem; color: #ccc; }
+        .h-score { font-family: var(--font-head); font-size: 6rem; color: var(--accent-red); line-height: 1; text-shadow: 0 0 30px rgba(255, 46, 46, 0.3); }
+        .memorial { margin-top: 20px; padding-left: 20px; border-left: 4px solid #fff; font-size: 1rem; color: #ccc; }
 
-        footer { text-align: center; padding: 40px; color: #555; font-size: 0.9rem; margin-top: 50px; border-top: 1px solid #222; }
+        footer { text-align: center; padding: 50px; color: #555; font-size: 0.9rem; margin-top: 60px; border-top: 1px solid #222; }
 
-        /* --- RWD --- */
+        /* --- RESPONSYWNOŚĆ (MOBILE) --- */
         @media (max-width: 900px) {
             #hero h1 { font-size: 4rem; }
             .squad-layout { grid-template-columns: 1fr; }
-            .field-zone { height: 400px; }
-            .dot { width: 35px; height: 35px; font-size: 1rem; }
+            .field-zone { height: 420px; margin-bottom: 30px; }
+            .dot { width: 40px; height: 40px; font-size: 1.1rem; }
+            
             .history-box { flex-direction: column; text-align: center; }
-            .h-score { font-size: 4rem; }
+            .h-score { font-size: 5rem; }
             
             .hamburger { display: flex; z-index: 1001; }
             .nav-links { 
-                position: fixed; top: 0; right: -100%; height: 100vh; width: 75%; 
+                position: fixed; top: 0; right: -100%; height: 100vh; width: 80%; 
                 background: #0e0e0e; flex-direction: column; justify-content: center; 
                 z-index: 999; border-left: 2px solid var(--accent-orange); transition: 0.4s; 
             }
@@ -373,9 +396,9 @@
                             <div class="crease bottom"></div>
                             
                             <a href="#card-9" class="dot pos-la dot-skill">9</a>
-                            <a href="#card-10" class="dot pos-ra dot-warn">10</a> <!-- Zmiana na 10 z ostrzeżeniem -->
+                            <a href="#card-10" class="dot pos-ra dot-warn">10</a> <!-- 10 na boisku, żółta kropka -->
                             <a href="#card-6" class="dot pos-c dot-mvp">6</a>
-                            <a href="#card-11" class="dot pos-ld dot-warn">11</a>
+                            <a href="#card-11" class="dot pos-ld dot-warn">11</a> <!-- 11 na boisku, żółta kropka -->
                             <a href="#card-13" class="dot pos-rd dot-teal">13</a>
                             <div class="dot pos-gk">GK</div>
                         </div>
@@ -394,7 +417,7 @@
                                         <span class="stat-label">DOŚWIADCZENIE (MAX)</span>
                                         <div class="progress-track"><div class="progress-fill" style="width: 100%"></div></div>
                                     </div>
-                                    <p>Największe doświadczenie w kadrze. Kompletny zestaw umiejętności: technika, przegląd pola i potężne uderzenie.</p>
+                                    <p>Największe doświadczenie w kadrze. Lider środka pola. Kompletny zestaw umiejętności.</p>
                                 </div>
                             </div>
                         </div>
@@ -414,30 +437,30 @@
                             </div>
                         </div>
 
-                        <!-- Nr 10 (Niepewny - Nowy Prawy Atak) -->
+                        <!-- Nr 10 (Nowy Prawy Atak - Zagrożony) -->
                         <div id="card-10" class="player-card style-warn">
                             <div class="card-content">
                                 <div class="card-num">10</div>
                                 <div class="card-info">
                                     <h3>DYNAMIKA</h3>
                                     <div class="stat-bar">
-                                        <span class="stat-label" style="color:#ffd700;">STABILNOŚĆ (NISKA)</span>
-                                        <div class="progress-track"><div class="progress-fill" style="width: 40%; background: #ffd700;"></div></div>
+                                        <span class="stat-label" style="color:var(--accent-yellow)">PEWNOŚĆ POZYCJI: NISKA</span>
+                                        <div class="progress-track"><div class="progress-fill" style="width: 30%; background:var(--accent-yellow)"></div></div>
                                     </div>
-                                    <p style="color:#ffd700; font-weight:700;">STATUS: ZAGROŻONY</p>
-                                    <p>Wstawiony do składu eksperymentalnie. Pozycja wysoce niestabilna, możliwe zmiany w każdej chwili.</p>
+                                    <p style="color:var(--accent-yellow); font-weight:700; margin-top:5px;">STATUS: BARDZO NIEPEWNY</p>
+                                    <p>Wstawiony do składu eksperymentalnie. Nr 8 czeka na zmianę w każdej chwili.</p>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Nr 11 (Warning) -->
+                        <!-- Nr 11 (Lewa Obrona - Zagrożona) -->
                         <div id="card-11" class="player-card style-warn">
                             <div class="card-content">
                                 <div class="card-num">11</div>
                                 <div class="card-info">
                                     <h3>DEFENSOR</h3>
-                                    <p style="color:#ffd700; font-weight:700;">KOREKTA: Gra jedną ręką zabroniona.</p>
-                                    <p>Musi trzymać kij oburącz, aby utrzymać miejsce.</p>
+                                    <p style="color:var(--accent-yellow); font-weight:700;">STATUS: ZAGROŻONY</p>
+                                    <p>Wymagana korekta techniczna (chwyt oburącz). Pozycja nie jest bezpieczna.</p>
                                 </div>
                             </div>
                         </div>
@@ -468,46 +491,41 @@
 
                 <div class="matrix-grid reveal">
                     
-                    <!-- Lewa Obrona -->
-                    <div class="matrix-col">
-                        <div class="col-head">HIERARCHIA: LEWA OBRONA</div>
-                        <div class="h-slot primary">
-                            <div class="h-badge">11</div>
-                            <div class="h-desc"><strong>PEWNIAK</strong><small>Wymagana korekta</small></div>
-                        </div>
-                        
-                        <div style="text-align:center; color:#666; font-size:0.75rem; margin: 8px 0;">ZMIENNICY (RÓWNY STATUS)</div>
-                        
-                        <div class="equal-row">
-                            <div class="h-slot equal">
-                                <div class="h-badge">17</div>
-                                <div class="h-desc"><strong>WETERAN</strong></div>
-                            </div>
-                            <div class="h-slot equal">
-                                <div class="h-badge">10</div>
-                                <div class="h-desc"><strong>ROTACJA</strong></div>
-                            </div>
-                        </div>
-                        <div class="future-note">Dalsze informacje zostaną dodane później.</div>
-                    </div>
-
-                    <!-- Prawy Atak (Zaktualizowany) -->
+                    <!-- Prawy Atak -->
                     <div class="matrix-col">
                         <div class="col-head">HIERARCHIA: PRAWY ATAK</div>
                         
                         <div class="h-slot unstable">
-                            <div class="h-badge" style="color:#ffd700;">10</div>
-                            <div class="h-desc"><strong style="color:#ffd700;">STARTER (CHWILOWY)</strong><small>Bardzo możliwe zmiany</small></div>
+                            <div class="h-badge" style="color:var(--accent-yellow)">10</div>
+                            <div class="h-desc"><strong style="color:var(--accent-yellow)">STARTER (CHWILOWY)</strong><small>Wysokie ryzyko zmiany</small></div>
                         </div>
                         
-                        <div style="text-align:center; font-size:1.2rem; color:#555;">⬇</div>
+                        <div class="divider-arrow">⬇</div>
                         
                         <div class="h-slot equal">
                             <div class="h-badge">08</div>
-                            <div class="h-desc"><strong>ALTERNATYWA</strong><small>Czeka na wejście</small></div>
+                            <div class="h-desc"><strong>ALTERNATYWA</strong><small>Gotowy do wejścia</small></div>
+                        </div>
+                        
+                        <div class="future-note">System zmian rotacyjnych i kolejni zawodnicy zostaną dodani wkrótce.</div>
+                    </div>
+
+                    <!-- Lewa Obrona -->
+                    <div class="matrix-col">
+                        <div class="col-head">HIERARCHIA: LEWA OBRONA</div>
+                        <div class="h-slot unstable">
+                            <div class="h-badge" style="color:var(--accent-yellow)">11</div>
+                            <div class="h-desc"><strong style="color:var(--accent-yellow)">STARTER (ZAGROŻONY)</strong><small>Wymagana poprawa</small></div>
+                        </div>
+                        
+                        <div class="divider-arrow">⬇</div>
+                        
+                        <div class="h-slot equal">
+                            <div class="h-badge">17</div>
+                            <div class="h-desc"><strong>ZMIENNIK NR 1</strong></div>
                         </div>
 
-                        <div class="future-note">Dalsze informacje zostaną dodane później.</div>
+                        <div class="future-note">System zmian rotacyjnych i kolejni zawodnicy zostaną dodani wkrótce.</div>
                     </div>
 
                     <!-- Analiza Rezerw -->
@@ -519,15 +537,7 @@
                                 <strong>NR 17</strong>
                                 <span class="status-ok">GOTOWY</span>
                             </div>
-                            <p>Długi staż treningowy. Solidna opcja defensywna, nadrabia ustawieniem.</p>
-                        </div>
-
-                        <div class="res-card">
-                            <div class="res-head">
-                                <strong>NR 08</strong>
-                                <span class="status-ok">GOTOWY</span>
-                            </div>
-                            <p>Stabilny zawodnik. Obecnie rezerwowy na prawy atak, ale bliski składu.</p>
+                            <p>Długi staż treningowy. Solidna opcja defensywna.</p>
                         </div>
 
                         <div class="res-card critical">
@@ -535,7 +545,7 @@
                                 <strong>NR 21</strong>
                                 <span class="status-bad">NISKI POZIOM</span>
                             </div>
-                            <p>Najsłabsze ogniwo. Wymaga pracy u podstaw. Głęboka rezerwa. ble ble ble</p>
+                            <p>Jest zdeterminowany i chce walczyć, ale umiejętności techniczne na ten moment nie wystarczają.</p>
                         </div>
                     </div>
 
