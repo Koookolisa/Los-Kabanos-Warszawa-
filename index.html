@@ -2,31 +2,37 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Los Kabanos - Raport Taktyczny</title>
     
-    <!-- Czcionki -->
+    <!-- Fonty: Teko (Nagłówki), Barlow (Tekst) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300;500;700&family=Barlow:wght@300;400;600;800&display=swap" rel="stylesheet">
 
     <style>
-        /* --- 1. KONFIGURACJA STYLU --- */
+        /* --- 1. ZMIENNE I KONFIGURACJA KOLORÓW --- */
         :root {
-            --bg-dark: #0a0a0a;
-            --panel-bg: #161616;
-            --panel-border: #333;
-            --orange: #ff4500;
-            --orange-glow: rgba(255, 69, 0, 0.4);
-            --text-white: #ffffff;
-            --text-gray: #999;
+            /* Tło */
+            --bg-deep: #080808;
+            --bg-panel: #121212;
+            --bg-card: #1a1a1a;
             
-            /* Nowe zaokrąglenia - Modern UI */
-            --radius-sm: 12px;
-            --radius-md: 24px;
-            --radius-lg: 35px;
-            --radius-pill: 50px;
-
+            /* Akcenty (Multikolor) */
+            --accent-orange: #ff4500;   /* Główny / MVP */
+            --accent-blue: #00a8ff;     /* Obrona / Stabilność */
+            --accent-purple: #bf00ff;   /* Atak / Technika */
+            --accent-yellow: #ffd700;   /* Ostrzeżenia */
+            --accent-red: #ff2e2e;      /* Krytyczne */
+            --accent-teal: #00ffcc;     /* Wojownik */
+            
+            /* UI */
+            --border-color: #333;
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 8px;
+            
+            /* Fonty */
             --font-head: 'Teko', sans-serif;
             --font-body: 'Barlow', sans-serif;
         }
@@ -34,254 +40,280 @@
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
         body {
-            background-color: #080808;
-            color: var(--text-white);
+            background-color: var(--bg-deep);
+            color: #f0f0f0;
             font-family: var(--font-body);
-            overflow-x: hidden;
+            overflow-x: hidden; /* Zapobiega przewijaniu na boki */
             
-            /* TŁO CARBON */
+            /* Matowy Carbon Pattern */
             background-image: 
-                linear-gradient(45deg, #121212 25%, transparent 25%, transparent 75%, #121212 75%, #121212),
-                linear-gradient(45deg, #121212 25%, transparent 25%, transparent 75%, #121212 75%, #121212);
+                linear-gradient(45deg, #0f0f0f 25%, transparent 25%, transparent 75%, #0f0f0f 75%, #0f0f0f),
+                linear-gradient(45deg, #0f0f0f 25%, transparent 25%, transparent 75%, #0f0f0f 75%, #0f0f0f);
             background-position: 0 0, 10px 10px;
             background-size: 20px 20px;
         }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
-        section { padding: 70px 0; }
+        section { padding: 60px 0; }
 
-        h1, h2, h3, h4 { font-family: var(--font-head); text-transform: uppercase; line-height: 1; letter-spacing: 1px; }
+        h1, h2, h3, h4 { font-family: var(--font-head); text-transform: uppercase; line-height: 1; letter-spacing: 1px; margin: 0; }
 
         /* --- 2. HEADER --- */
         header {
             position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-            background: rgba(10, 10, 10, 0.9);
+            background: rgba(8, 8, 8, 0.95);
             backdrop-filter: blur(15px);
             border-bottom: 1px solid #333;
             padding: 15px 0;
-            border-bottom-left-radius: var(--radius-md);
-            border-bottom-right-radius: var(--radius-md);
+            border-bottom-left-radius: var(--radius-lg);
+            border-bottom-right-radius: var(--radius-lg);
         }
         .navbar { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 2rem; font-weight: 700; letter-spacing: 1px; }
-        .logo span { color: var(--orange); }
-        
-        .nav-links { display: flex; gap: 30px; list-style: none; }
-        .nav-links a { font-size: 1.2rem; font-weight: 500; color: #ccc; padding: 5px 15px; border-radius: var(--radius-pill); transition: 0.3s; }
-        .nav-links a:hover { background: rgba(255, 69, 0, 0.1); color: var(--orange); }
-        
+        .logo { font-size: 2rem; font-weight: 700; letter-spacing: 2px; }
+        .logo span { color: var(--accent-orange); }
+
+        .nav-links { display: flex; gap: 25px; list-style: none; }
+        .nav-links a { font-size: 1.1rem; font-weight: 600; color: #888; padding: 6px 16px; border-radius: 50px; transition: 0.3s; }
+        .nav-links a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+
         .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
-        .hamburger .bar { width: 30px; height: 3px; background: var(--orange); border-radius: 5px; }
+        .hamburger .bar { width: 28px; height: 3px; background: var(--accent-orange); border-radius: 3px; }
 
         /* --- 3. HERO --- */
         #hero {
-            height: 85vh; display: flex; align-items: center; justify-content: center; text-align: center;
-            background: radial-gradient(circle, rgba(255,69,0,0.08) 0%, transparent 70%);
-            margin-top: 60px;
+            min-height: 85vh; display: flex; align-items: center; justify-content: center; text-align: center;
+            background: radial-gradient(circle, rgba(255,69,0,0.06) 0%, transparent 70%);
+            padding-top: 80px;
         }
         .hero-tag { 
-            color: var(--orange); font-weight: 700; letter-spacing: 3px; 
-            margin-bottom: 15px; font-size: 0.9rem; border: 1px solid var(--orange);
-            display: inline-block; padding: 8px 20px; border-radius: var(--radius-pill);
+            border: 1px solid var(--accent-orange); color: var(--accent-orange); 
+            padding: 6px 15px; border-radius: 50px; font-weight: 700; font-size: 0.9rem; display: inline-block; margin-bottom: 15px;
         }
-        #hero h1 { font-size: 5.5rem; margin-bottom: 20px; font-weight: 500; line-height: 0.9; }
+        #hero h1 { font-size: 5rem; font-weight: 500; line-height: 0.9; margin-bottom: 20px; }
         .outline { -webkit-text-stroke: 1px #fff; color: transparent; font-weight: 700; }
         
         .btn-primary {
-            display: inline-block; padding: 15px 45px; background: var(--orange); color: #000;
-            font-family: var(--font-head); font-size: 1.5rem; font-weight: 700; margin-top: 20px;
-            border-radius: var(--radius-pill); /* Pełne zaokrąglenie */
-            box-shadow: 0 10px 30px rgba(255,69,0,0.3);
+            display: inline-block; padding: 15px 40px; background: var(--accent-orange); color: #000;
+            font-family: var(--font-head); font-size: 1.5rem; font-weight: 700; margin-top: 25px;
+            border-radius: 50px; box-shadow: 0 10px 30px rgba(255,69,0,0.25);
         }
-        .btn-primary:hover { background: #fff; transform: translateY(-5px) scale(1.05); }
+        .btn-primary:hover { background: #fff; transform: translateY(-5px); }
 
         /* --- 4. ARENY --- */
         .section-header { text-align: center; margin-bottom: 40px; }
-        .section-header h2 { font-size: 3.5rem; margin-bottom: 10px; }
-        .orange-line { width: 80px; height: 5px; background: var(--orange); margin: 0 auto; border-radius: var(--radius-pill); }
+        .section-header h2 { font-size: 3.5rem; }
+        .divider { width: 60px; height: 5px; background: var(--accent-orange); margin: 10px auto; border-radius: 10px; }
 
-        .arenas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
+        .arenas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; }
         .arena-box {
-            background: var(--panel-bg); border: 1px solid var(--panel-border); padding: 25px; text-align: center;
-            transition: 0.3s; border-radius: var(--radius-md);
+            background: var(--bg-panel); border: 1px solid var(--border-color); padding: 20px; text-align: center;
+            border-radius: var(--radius-md); transition: 0.3s;
         }
-        .arena-box:hover { border-color: var(--orange); transform: translateY(-5px); background: #222; }
-        .main-arena { grid-column: span 2; background: linear-gradient(135deg, #222, #0e0e0e); border: 1px solid var(--orange); box-shadow: 0 0 30px rgba(255,69,0,0.1); }
-        .arena-box .icon { font-size: 2.2rem; margin-bottom: 10px; display: block; }
-        .retired { opacity: 0.4; border-style: dashed; }
+        .arena-box:hover { transform: translateY(-5px); border-color: var(--accent-orange); background: #222; }
+        .main-arena { 
+            grid-column: span 2; background: linear-gradient(135deg, #1a1a1a, #0e0e0e); 
+            border: 1px solid var(--accent-orange); box-shadow: 0 5px 20px rgba(255,69,0,0.1);
+        }
+        .arena-box .icon { font-size: 2rem; margin-bottom: 10px; display: block; }
+        .retired { opacity: 0.3; border-style: dashed; }
 
-        /* --- 5. SKŁAD --- */
+        /* --- 5. SKŁAD (BOISKO I KARTY) --- */
         .alert-banner {
-            background: rgba(255,69,0,0.1); border: 1px solid var(--orange);
-            padding: 15px; margin-bottom: 40px; text-align: center; font-weight: 600;
-            border-radius: var(--radius-md); color: var(--orange);
+            background: rgba(255,69,0,0.1); border: 1px solid var(--accent-orange); border-radius: var(--radius-md);
+            padding: 15px; margin-bottom: 30px; text-align: center; color: var(--accent-orange); font-weight: 600;
         }
 
-        .squad-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 40px; }
+        .squad-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 30px; }
 
-        /* Boisko - Zaokrąglone */
-        .field-zone { position: relative; height: 500px; width: 100%; }
+        /* Responsywne Boisko */
+        .field-zone { position: relative; width: 100%; height: 500px; }
         .rink-matte {
-            width: 100%; height: 100%;
-            background: #181818;
-            border: 4px solid #333;
-            border-radius: 50px; /* Mocne zaokrąglenie rogów boiska */
-            position: relative; overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            width: 100%; height: 100%; background: #161616; border: 3px solid #333;
+            border-radius: 40px; position: relative; overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
-        .rink-lines {
-            position: absolute; top: 50%; width: 100%; height: 2px; background: #444; transform: translateY(-50%);
-        }
+        .rink-lines { position: absolute; top: 50%; width: 100%; height: 2px; background: #444; transform: translateY(-50%); }
         .crease {
             position: absolute; width: 80px; height: 40px; left: 50%; transform: translateX(-50%);
-            border: 2px solid var(--orange); background: rgba(255,69,0,0.1);
+            border: 2px solid var(--accent-orange); background: rgba(255,69,0,0.1);
         }
-        .crease.top { top: 0; border-top: none; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; }
-        .crease.bottom { bottom: 0; border-bottom: none; border-top-left-radius: 25px; border-top-right-radius: 25px; }
+        .crease.top { top: 0; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; border-top: none; }
+        .crease.bottom { bottom: 0; border-top-left-radius: 25px; border-top-right-radius: 25px; border-bottom: none; }
 
         /* Kropki */
         .dot {
-            position: absolute; width: 48px; height: 48px;
+            position: absolute; width: 45px; height: 45px;
             background: #222; border: 2px solid #fff; border-radius: 50%;
             display: flex; justify-content: center; align-items: center;
             font-family: var(--font-head); font-size: 1.4rem; font-weight: 700; color: #fff;
             transform: translate(-50%, -50%); cursor: pointer; z-index: 10; transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.6);
         }
-        .dot:hover { background: var(--orange); border-color: var(--orange); color: #000; transform: translate(-50%, -50%) scale(1.15); }
+        .dot:hover { transform: translate(-50%, -50%) scale(1.2); z-index: 20; }
 
-        .pos-gk { top: 90%; left: 50%; border-radius: 10px; width: 45px; height: 28px; font-size: 1rem; background: #000; border-color: #444; cursor: default; }
+        /* Kolory Kropek */
+        .dot-mvp { border-color: var(--accent-orange); color: var(--accent-orange); }
+        .dot-mvp:hover { background: var(--accent-orange); color: #000; }
+        
+        .dot-skill { border-color: var(--accent-purple); color: var(--accent-purple); }
+        .dot-skill:hover { background: var(--accent-purple); color: #fff; }
+
+        .dot-warn { border-color: var(--accent-yellow); color: var(--accent-yellow); }
+        .dot-warn:hover { background: var(--accent-yellow); color: #000; }
+        
+        .dot-contest { width: 70px; border-radius: 20px; font-size: 1.2rem; border-color: #fff; }
+        .dot-contest:hover { background: #fff; color: #000; }
+
+        .pos-gk { top: 90%; left: 50%; border-radius: 8px; width: 45px; height: 25px; font-size: 1rem; background: #000; border-color: #444; cursor: default; }
         .pos-ld { top: 70%; left: 25%; }
         .pos-rd { top: 70%; left: 75%; }
-        .pos-c  { top: 50%; left: 50%; width: 65px; height: 65px; font-size: 1.8rem; border-color: var(--orange); color: var(--orange); background: #1a1a1a; }
+        .pos-c  { top: 50%; left: 50%; width: 60px; height: 60px; font-size: 1.8rem; background: #1a1a1a; }
         .pos-la { top: 25%; left: 25%; }
         .pos-ra { top: 25%; left: 75%; }
 
-        .dot.warning { border-color: #ffd700; color: #ffd700; }
-        .dot.contest { border-color: #fff; color: #fff; width: 70px; border-radius: 30px; font-size: 1.2rem; }
-
-        /* KARTY - MODERN ROUNDED */
-        .cards-zone { display: flex; flex-direction: column; gap: 20px; }
+        /* Karty Graczy */
+        .cards-zone { display: flex; flex-direction: column; gap: 15px; }
 
         .player-card {
-            background: var(--panel-bg); border: 1px solid var(--panel-border);
-            border-radius: var(--radius-md); /* Zaokrąglone karty */
-            display: flex; flex-direction: column; transition: 0.3s;
-            position: relative; overflow: hidden; scroll-margin-top: 120px;
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: var(--radius-md); position: relative; overflow: hidden;
+            transition: 0.3s; scroll-margin-top: 120px;
         }
-        .player-card:hover { border-color: #555; transform: translateX(5px); }
-        .player-card.highlight { border-color: var(--orange); box-shadow: 0 0 30px var(--orange-glow); }
+        .player-card:hover { transform: translateX(5px); border-color: #666; }
+        .player-card.highlight { transform: scale(1.02); box-shadow: 0 0 30px rgba(255,255,255,0.1); z-index: 5; }
 
-        .card-head {
-            background: #111; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 1px solid var(--panel-border);
-        }
-        .role { font-size: 0.85rem; color: #777; font-weight: 700; letter-spacing: 1px; }
-        .status-badge { 
-            font-size: 0.7rem; background: var(--orange); color: #000; padding: 4px 10px; 
-            font-weight: 700; border-radius: var(--radius-pill);
-        }
-        .status-badge.contest { background: #fff; }
-        .status-badge.warning { background: #ffd700; }
-
-        .card-body { padding: 25px; display: flex; align-items: center; gap: 25px; }
-        .card-big-num { font-family: var(--font-head); font-size: 4rem; color: #222; line-height: 0.8; font-weight: 700; }
-        .mvp-card .card-big-num { color: var(--orange); text-shadow: 0 0 30px rgba(255,69,0,0.2); }
-
-        .card-details h3 { font-size: 1.6rem; margin-bottom: 8px; color: #fff; }
-        .card-details p { font-size: 1rem; color: var(--text-gray); line-height: 1.5; }
-        .alert-text { color: #ff3c00; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; }
-
-        /* Paski */
-        .stat-row { margin-bottom: 12px; }
-        .stat-row span { font-size: 0.75rem; color: #666; display: block; margin-bottom: 4px; font-weight: 600; }
-        .bar-track { width: 100%; height: 8px; background: #2a2a2a; border-radius: 10px; }
-        .bar-fill { height: 100%; background: var(--orange); border-radius: 10px; }
-
-        /* Rywalizacja */
-        .contest-split { display: flex; width: 100%; align-items: center; gap: 20px; }
-        .c-player { flex: 1; text-align: center; background: #111; padding: 10px; border-radius: var(--radius-sm); }
-        .c-num { font-family: var(--font-head); font-size: 2.2rem; color: #fff; }
-        .vs-divider { font-weight: 900; color: #444; font-style: italic; font-size: 1.5rem; }
-
-        /* --- 6. HIERARCHIA --- */
-        .hierarchy-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px;
-        }
-        .h-column { 
-            background: #141414; border: 1px solid var(--panel-border); 
-            border-radius: var(--radius-md); padding: 25px; 
-        }
-        .h-column.wide { grid-column: 1 / -1; }
-        .h-header { font-family: var(--font-head); font-size: 1.5rem; border-bottom: 2px solid #333; margin-bottom: 20px; color: #ccc; }
-
-        .h-slot { 
-            background: #0a0a0a; border: 1px solid #222; padding: 15px; display: flex; align-items: center; gap: 15px;
-            margin-bottom: 12px; border-radius: var(--radius-sm);
-        }
-        .h-slot.starter { border-left: 4px solid var(--orange); }
+        /* Style Kolorystyczne Kart */
+        .style-mvp { border-left: 4px solid var(--accent-orange); }
+        .style-mvp h3 { color: var(--accent-orange); }
+        .style-mvp .progress-fill { background: var(--accent-orange); }
         
-        /* Styl dla równorzędnych zmienników */
-        .h-row-split { display: flex; gap: 10px; width: 100%; }
-        .h-slot.equal { flex: 1; border-left: 4px solid #0088ff; }
-
-        .h-num { font-family: var(--font-head); font-size: 2rem; width: 40px; text-align: center; color: #fff; }
-        .h-name { font-weight: 700; font-size: 1rem; }
+        .style-skill { border-left: 4px solid var(--accent-purple); }
+        .style-skill h3 { color: var(--accent-purple); }
+        .style-skill .progress-fill { background: var(--accent-purple); }
         
-        /* Karty Zasobów */
-        .resource-card { background: #0a0a0a; padding: 15px; border: 1px solid #333; margin-bottom: 10px; border-radius: var(--radius-sm); }
-        .rc-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px solid #222; padding-bottom: 5px; }
-        .rc-num { font-family: var(--font-head); font-size: 1.8rem; color: #fff; }
-        .text-green { color: #0088ff; font-weight: 700; }
-        .text-red { color: #ff3c00; font-weight: 700; }
-        .resource-card.critical { border-left: 4px solid #ff3c00; }
+        .style-def { border-left: 4px solid var(--accent-blue); }
+        .style-def h3 { color: var(--accent-blue); }
+        .style-def .progress-fill { background: var(--accent-blue); }
 
-        /* --- 7. SKLEP & HISTORIA --- */
-        .shop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
-        .shop-item { background: #141414; border: 1px solid #333; transition: 0.3s; border-radius: var(--radius-md); overflow: hidden; }
-        .shop-item:hover { border-color: var(--orange); transform: translateY(-5px); }
-        .item-img { 
-            height: 220px; background: #111; display: flex; align-items: center; justify-content: center;
+        .style-warn { border-left: 4px solid var(--accent-yellow); }
+        .style-warn h3 { color: var(--accent-yellow); }
+        
+        .style-teal { border-left: 4px solid var(--accent-teal); }
+        .style-teal h3 { color: var(--accent-teal); }
+
+        .card-content { padding: 20px; display: flex; align-items: center; gap: 20px; }
+        .card-num { font-family: var(--font-head); font-size: 3.5rem; font-weight: 700; color: #333; line-height: 0.8; }
+        .style-mvp .card-num { color: var(--accent-orange); opacity: 0.8; }
+        
+        .card-info { flex: 1; min-width: 0; } /* min-width zapobiega wylewaniu */
+        .card-info h3 { font-size: 1.4rem; margin-bottom: 5px; }
+        .card-info p { font-size: 0.95rem; color: #aaa; line-height: 1.4; word-wrap: break-word; }
+        
+        .stat-bar { margin-top: 10px; }
+        .stat-label { font-size: 0.7rem; color: #666; font-weight: 700; display: block; margin-bottom: 3px; }
+        .progress-track { width: 100%; height: 6px; background: #333; border-radius: 10px; }
+        .progress-fill { height: 100%; border-radius: 10px; }
+
+        .contest-flex { display: flex; gap: 10px; margin-top: 10px; }
+        .c-box { flex: 1; background: #111; padding: 8px; border-radius: var(--radius-sm); text-align: center; border: 1px solid #333; }
+        .c-box strong { display: block; font-size: 1.2rem; font-family: var(--font-head); }
+        .c-box span { font-size: 0.75rem; color: #777; }
+
+        /* --- 6. HIERARCHIA (MATRYCA) --- */
+        .matrix-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;
+        }
+        .matrix-col {
+            background: var(--bg-panel); border: 1px solid var(--border-color);
+            border-radius: var(--radius-md); padding: 25px;
+        }
+        .col-full { grid-column: 1 / -1; }
+        
+        .col-head { font-family: var(--font-head); font-size: 1.5rem; border-bottom: 2px solid #333; margin-bottom: 20px; color: #ccc; }
+
+        /* Sloty w hierarchii */
+        .h-slot {
+            background: #0e0e0e; padding: 12px; margin-bottom: 10px; border-radius: var(--radius-sm);
+            display: flex; align-items: center; gap: 15px; border: 1px solid #222;
+        }
+        .h-slot.primary { border-left: 4px solid var(--accent-blue); }
+        .h-slot.contest { border-left: 4px solid #fff; }
+        
+        /* Zmiennicy 10 i 17 równi */
+        .equal-row { display: flex; gap: 10px; }
+        .h-slot.equal { flex: 1; border-left: 4px solid #555; }
+
+        .h-badge { 
+            font-family: var(--font-head); font-size: 1.6rem; width: 35px; text-align: center; color: #fff; 
+            background: #222; border-radius: 5px; line-height: 1.6rem; padding-top: 2px;
+        }
+        .h-desc { flex: 1; }
+        .h-desc strong { display: block; font-size: 0.9rem; color: #fff; }
+        .h-desc small { font-size: 0.75rem; color: #777; }
+
+        .future-note { text-align: center; color: #555; font-size: 0.8rem; margin-top: 15px; font-style: italic; }
+
+        /* Karty Rezerw */
+        .res-card { background: #0f0f0f; padding: 15px; border-radius: var(--radius-sm); margin-bottom: 10px; border: 1px solid #252525; }
+        .res-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px solid #222; padding-bottom: 5px; }
+        .res-head strong { font-size: 1.2rem; font-family: var(--font-head); }
+        
+        .status-ok { color: var(--accent-blue); font-weight: 700; font-size: 0.8rem; }
+        .status-bad { color: var(--accent-red); font-weight: 700; font-size: 0.8rem; }
+        .res-card p { font-size: 0.85rem; color: #999; line-height: 1.4; }
+        .res-card.critical { border-left: 3px solid var(--accent-red); }
+
+        /* --- 7. SKLEP --- */
+        .shop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+        .shop-item {
+            background: var(--bg-panel); border: 1px solid #333; border-radius: var(--radius-md); overflow: hidden;
+            transition: 0.3s;
+        }
+        .shop-item:hover { border-color: var(--accent-orange); transform: translateY(-5px); }
+        .item-vis {
+            height: 200px; background: #111; display: flex; align-items: center; justify-content: center;
             font-family: var(--font-head); font-size: 3rem; font-weight: 700; color: #222; letter-spacing: 5px;
         }
-        .item-img.home { background: linear-gradient(135deg, #000, #222); }
-        .item-img.away { background: linear-gradient(135deg, #222, #444); }
-        .item-img.gk { background: linear-gradient(135deg, #001100, #002200); }
+        .vis-home { background: linear-gradient(135deg, #000, #222); }
+        .vis-away { background: linear-gradient(135deg, #222, #444); }
+        .vis-gk { background: linear-gradient(135deg, #001100, #002200); }
         
-        .item-meta { padding: 20px; text-align: center; }
-        .price { color: var(--orange); font-weight: 700; font-size: 1.3rem; display: block; margin-top: 5px; }
-        .shop-item button { 
-            width: 100%; background: transparent; border: none; border-top: 1px solid #333; color: #fff; 
-            padding: 15px; cursor: pointer; font-weight: 700; transition: 0.2s; font-family: var(--font-head); font-size: 1.2rem;
+        .item-info { padding: 20px; text-align: center; }
+        .price { color: var(--accent-orange); font-weight: 700; font-size: 1.2rem; display: block; margin: 5px 0 15px 0; }
+        .btn-shop {
+            width: 100%; background: transparent; border: 1px solid #444; color: #fff; padding: 10px; 
+            border-radius: var(--radius-pill); cursor: pointer; font-weight: 600; transition: 0.2s;
         }
-        .shop-item button:hover { background: var(--orange); color: #000; }
+        .btn-shop:hover { background: var(--accent-orange); border-color: var(--accent-orange); color: #000; }
 
+        /* --- 8. HISTORIA --- */
         .history-box {
-            border: 1px solid var(--orange); background: rgba(255,69,0,0.05); padding: 40px;
-            display: flex; align-items: center; gap: 40px; border-radius: var(--radius-md);
+            border: 1px solid var(--accent-red); background: rgba(255, 46, 46, 0.05); padding: 30px;
+            border-radius: var(--radius-md); display: flex; align-items: center; gap: 30px;
         }
-        .h-score { font-family: var(--font-head); font-size: 6rem; color: #ff3c00; line-height: 1; }
-        .memorial { margin-top: 20px; border-left: 3px solid #fff; padding-left: 15px; color: #ccc; }
+        .h-score { font-family: var(--font-head); font-size: 5rem; color: var(--accent-red); line-height: 1; }
+        .memorial { margin-top: 15px; padding-left: 15px; border-left: 3px solid #fff; font-size: 0.9rem; color: #ccc; }
 
-        footer { text-align: center; padding: 50px; color: #555; font-size: 0.9rem; border-top: 1px solid #222; margin-top: 50px; }
+        footer { text-align: center; padding: 40px; color: #555; font-size: 0.9rem; margin-top: 50px; border-top: 1px solid #222; }
 
-        /* --- MOBILE RESPONSIVE --- */
+        /* --- RESPONSYWNOŚĆ (MOBILE) --- */
         @media (max-width: 900px) {
-            #hero h1 { font-size: 3.5rem; }
-            .squad-layout { grid-template-columns: 1fr; } /* Jeden pod drugim */
-            .field-zone { height: 400px; margin-bottom: 30px; }
-            .dot { width: 38px; height: 38px; font-size: 1rem; }
-            .dot.contest { width: 60px; font-size: 0.9rem; }
+            #hero h1 { font-size: 4rem; }
+            .squad-layout { grid-template-columns: 1fr; }
+            .field-zone { height: 400px; }
+            .dot { width: 35px; height: 35px; font-size: 1rem; }
+            .dot-contest { width: 60px; font-size: 0.9rem; }
             
             .history-box { flex-direction: column; text-align: center; }
-            .h-score { font-size: 4.5rem; }
-
+            .h-score { font-size: 4rem; }
+            
+            /* Menu Mobilne */
             .hamburger { display: flex; z-index: 1001; }
             .nav-links { 
-                position: fixed; top: 0; right: -100%; height: 100vh; width: 80%; 
+                position: fixed; top: 0; right: -100%; height: 100vh; width: 75%; 
                 background: #0e0e0e; flex-direction: column; justify-content: center; 
-                z-index: 999; border-left: 2px solid var(--orange); transition: 0.4s; 
+                z-index: 999; border-left: 2px solid var(--accent-orange); transition: 0.4s; 
             }
             .nav-links.active { right: 0; }
         }
@@ -307,7 +339,6 @@
     </header>
 
     <main>
-        <!-- HERO -->
         <section id="hero">
             <div class="hero-content reveal">
                 <div class="hero-tag">SEZON ZEMSTY</div>
@@ -317,12 +348,11 @@
             </div>
         </section>
 
-        <!-- ARENY -->
         <section id="arenas">
             <div class="container">
                 <div class="section-header reveal">
                     <h2>STREFY WPŁYWÓW</h2>
-                    <div class="orange-line"></div>
+                    <div class="divider"></div>
                 </div>
                 <div class="arenas-grid reveal">
                     <div class="arena-box main-arena">
@@ -339,12 +369,11 @@
             </div>
         </section>
 
-        <!-- TAKTYKA -->
         <section id="squad">
             <div class="container">
                 <div class="section-header reveal">
                     <h2>RAPORT BOISKOWY</h2>
-                    <div class="hero-tag" style="margin: 0;">19.11.2025</div>
+                    <div class="hero-tag" style="margin:0;">19.11.2025</div>
                 </div>
 
                 <div class="alert-banner reveal">
@@ -352,108 +381,87 @@
                 </div>
 
                 <div class="squad-layout reveal">
-                    
-                    <!-- BOISKO (Modern Rounded) -->
+                    <!-- BOISKO -->
                     <div class="field-zone">
                         <div class="rink-matte">
                             <div class="rink-lines"></div>
                             <div class="crease top"></div>
                             <div class="crease bottom"></div>
                             
-                            <!-- Zawodnicy -->
-                            <a href="#card-9" class="dot pos-la">9</a>
-                            <a href="#card-810" class="dot pos-ra contest">8 | 10</a>
-                            <a href="#card-6" class="dot pos-c">6</a>
-                            <a href="#card-11" class="dot pos-ld warning">11</a>
-                            <a href="#card-13" class="dot pos-rd">13</a>
+                            <a href="#card-9" class="dot pos-la dot-skill">9</a>
+                            <a href="#card-810" class="dot pos-ra dot-contest">8 | 10</a>
+                            <a href="#card-6" class="dot pos-c dot-mvp">6</a>
+                            <a href="#card-11" class="dot pos-ld dot-warn">11</a>
+                            <a href="#card-13" class="dot pos-rd dot-teal">13</a>
                             <div class="dot pos-gk">GK</div>
                         </div>
                     </div>
 
-                    <!-- KARTY (Rounded Modern) -->
+                    <!-- KARTY ZAWODNIKÓW -->
                     <div class="cards-zone">
                         
-                        <!-- NR 6 -->
-                        <div id="card-6" class="player-card mvp-card">
-                            <div class="card-head">
-                                <span class="role">ŚRODEK (C)</span>
-                                <span class="status-badge">KAPITAN</span>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-big-num">06</div>
-                                <div class="card-details">
-                                    <h3>WIRTUOZ</h3>
-                                    <div class="stat-row">
-                                        <span>DOŚWIADCZENIE</span>
-                                        <div class="bar-track"><div class="bar-fill" style="width: 100%"></div></div>
+                        <!-- Nr 6 (MVP) -->
+                        <div id="card-6" class="player-card style-mvp">
+                            <div class="card-content">
+                                <div class="card-num">06</div>
+                                <div class="card-info">
+                                    <h3>WIRTUOZ (C)</h3>
+                                    <div class="stat-bar">
+                                        <span class="stat-label">DOŚWIADCZENIE (MAX)</span>
+                                        <div class="progress-track"><div class="progress-fill" style="width: 100%"></div></div>
                                     </div>
-                                    <p>Największe doświadczenie w kadrze. Kompletny zestaw umiejętności: od techniki po potężne uderzenie.</p>
+                                    <p>Największe doświadczenie w kadrze. Kompletny zestaw umiejętności: technika, przegląd pola i potężne uderzenie.</p>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- NR 9 -->
-                        <div id="card-9" class="player-card">
-                            <div class="card-head"><span class="role">LEWY ATAK</span></div>
-                            <div class="card-body">
-                                <div class="card-big-num">09</div>
-                                <div class="card-details">
+                        <!-- Nr 9 (Skill) -->
+                        <div id="card-9" class="player-card style-skill">
+                            <div class="card-content">
+                                <div class="card-num">09</div>
+                                <div class="card-info">
                                     <h3>MÓZG OPERACJI</h3>
-                                    <div class="stat-row">
-                                        <span>SIŁA UDERZENIA (~72%)</span>
-                                        <div class="bar-track"><div class="bar-fill" style="width: 72%"></div></div>
+                                    <div class="stat-bar">
+                                        <span class="stat-label">ROZEGRANIE</span>
+                                        <div class="progress-track"><div class="progress-fill" style="width: 95%"></div></div>
                                     </div>
-                                    <div class="stat-row">
-                                        <span>ROZEGRANIE</span>
-                                        <div class="bar-track"><div class="bar-fill" style="width: 95%"></div></div>
-                                    </div>
-                                    <p>Specjalista od trudnych piłek. Wykorzystuje spryt, by otwierać drogę do bramki.</p>
+                                    <p>Specjalista od trudnych piłek. Wykorzystuje spryt i technikę, by otwierać drogę do bramki.</p>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 8 vs 10 -->
+                        <!-- 8 vs 10 (Contest) -->
                         <div id="card-810" class="player-card">
-                            <div class="card-head">
-                                <span class="role">PRAWY ATAK</span>
-                                <span class="status-badge contest">RYWALIZACJA</span>
-                            </div>
-                            <div class="card-body" style="flex-direction: column; align-items: stretch;">
-                                <div class="contest-split">
-                                    <div class="c-player">
-                                        <div class="c-num">08</div>
-                                        <p style="font-size: 0.8rem; color: #888;">Stabilność.</p>
+                            <div class="card-content">
+                                <div class="card-num" style="font-size:2rem;">08/10</div>
+                                <div class="card-info">
+                                    <h3>STREFA WALKI</h3>
+                                    <div class="contest-flex">
+                                        <div class="c-box"><strong>08</strong><span>Stabilność</span></div>
+                                        <div class="c-box"><strong>10</strong><span>Dynamika</span></div>
                                     </div>
-                                    <div class="vs-divider">VS</div>
-                                    <div class="c-player">
-                                        <div class="c-num">10</div>
-                                        <p style="font-size: 0.8rem; color: #888;">Dynamika.</p>
-                                    </div>
+                                    <p style="margin-top:10px;">Otwarta rywalizacja o miejsce w składzie.</p>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- NR 11 -->
-                        <div id="card-11" class="player-card">
-                            <div class="card-head">
-                                <span class="role">LEWA OBRONA</span>
-                                <span class="status-badge warning">KOREKTA</span>
-                            </div>
-                            <div class="card-body">
-                                <div class="card-big-num">11</div>
-                                <div class="card-details">
+                        <!-- Nr 11 (Warning) -->
+                        <div id="card-11" class="player-card style-warn">
+                            <div class="card-content">
+                                <div class="card-num">11</div>
+                                <div class="card-info">
                                     <h3>DEFENSOR</h3>
-                                    <p class="alert-text">UWAGA: Bezwzględny nakaz gry oburącz. Puszczanie kija jest zabronione.</p>
+                                    <p style="color:#ffd700; font-weight:700;">WYMAGANA KOREKTA: Gra jedną ręką jest zabroniona.</p>
+                                    <p>Musi trzymać kij oburącz, aby utrzymać miejsce.</p>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- NR 13 -->
-                        <div id="card-13" class="player-card">
-                            <div class="card-head"><span class="role">PRAWA OBRONA</span></div>
-                            <div class="card-body">
-                                <div class="card-big-num">13</div>
-                                <div class="card-details">
+                        <!-- Nr 13 (Teal) -->
+                        <div id="card-13" class="player-card style-teal">
+                            <div class="card-content">
+                                <div class="card-num">13</div>
+                                <div class="card-info">
                                     <h3>WOJOWNIK</h3>
                                     <p>Braki taktyczne nadrabia wielkim sercem. Walczy o każdy centymetr parkietu.</p>
                                 </div>
@@ -465,64 +473,73 @@
             </div>
         </section>
 
-        <!-- MATRYCA KADROWA (Nowa Hierarchia) -->
+        <!-- MATRYCA (HIERARCHIA) -->
         <section id="hierarchy">
             <div class="container">
                 <div class="section-header reveal">
                     <h2>MATRYCA KADROWA</h2>
-                    <div class="orange-line"></div>
+                    <div class="divider"></div>
                 </div>
 
-                <div class="hierarchy-grid reveal">
+                <div class="matrix-grid reveal">
                     
                     <!-- Lewa Obrona -->
-                    <div class="h-column">
-                        <div class="h-header">HIERARCHIA LO</div>
-                        <!-- Nr 11 -->
-                        <div class="h-slot starter">
-                            <span class="h-num">11</span>
-                            <span class="h-name">STARTER</span>
+                    <div class="matrix-col">
+                        <div class="col-head">HIERARCHIA: LEWA OBRONA</div>
+                        <div class="h-slot primary">
+                            <div class="h-badge">11</div>
+                            <div class="h-desc"><strong>PEWNIAK</strong><small>Wymagana korekta chwytu</small></div>
                         </div>
                         
-                        <div style="text-align:center; color:#555; font-size:0.8rem; margin: 5px 0;">⬇ ALTERNATYWY (RÓWNE) ⬇</div>
+                        <div style="text-align:center; color:#666; font-size:0.75rem; margin: 8px 0;">ZMIENNICY (RÓWNY STATUS)</div>
                         
-                        <!-- Równe opcje 10 i 17 -->
-                        <div class="h-row-split">
+                        <div class="equal-row">
                             <div class="h-slot equal">
-                                <span class="h-num">17</span>
-                                <span class="h-name">WETERAN</span>
+                                <div class="h-badge">17</div>
+                                <div class="h-desc"><strong>WETERAN</strong></div>
                             </div>
                             <div class="h-slot equal">
-                                <span class="h-num">10</span>
-                                <span class="h-name">ROTACJA</span>
+                                <div class="h-badge">10</div>
+                                <div class="h-desc"><strong>ROTACJA</strong></div>
                             </div>
                         </div>
+                        <div class="future-note">Dalsze informacje zostaną dodane później.</div>
                     </div>
 
-                    <!-- Analiza -->
-                    <div class="h-column wide">
-                        <div class="h-header">ANALIZA REZERW</div>
+                    <!-- Prawy Atak -->
+                    <div class="matrix-col">
+                        <div class="col-head">HIERARCHIA: PRAWY ATAK</div>
+                        <div class="h-slot contest">
+                            <div style="font-family:var(--font-head); font-size:1.5rem; color:#fff; margin-right:10px;">08 vs 10</div>
+                            <div class="h-desc"><strong>RYWALIZACJA OTWARTA</strong><small>Status równy. Decyduje dyspozycja.</small></div>
+                        </div>
+                        <div class="future-note">Dalsze informacje zostaną dodane później.</div>
+                    </div>
+
+                    <!-- Analiza Rezerw -->
+                    <div class="matrix-col col-full">
+                        <div class="col-head">ANALIZA REZERW</div>
                         
-                        <div class="resource-card">
-                            <div class="rc-head">
-                                <span class="rc-num">17</span>
-                                <span class="text-green">GOTOWY</span>
+                        <div class="res-card">
+                            <div class="res-head">
+                                <strong>NR 17</strong>
+                                <span class="status-ok">GOTOWY</span>
                             </div>
-                            <p>Wieloletni staż treningowy. Mimo pewnych braków technicznych, jest bardzo solidnym kandydatem na obronę.</p>
+                            <p>Długi staż treningowy. Solidna opcja defensywna, nadrabia ustawieniem.</p>
                         </div>
 
-                        <div class="resource-card">
-                            <div class="rc-head">
-                                <span class="rc-num">10</span>
-                                <span class="text-green">GOTOWY</span>
+                        <div class="res-card">
+                            <div class="res-head">
+                                <strong>NR 10</strong>
+                                <span class="status-ok">GOTOWY</span>
                             </div>
-                            <p>Opcja rotacyjna. Może wejść zarówno na obronę (wymiennie z 17), jak i walczyć o atak.</p>
+                            <p>Uniwersalny zmiennik. Walczy o atak, ale jest też opcją na obronę.</p>
                         </div>
 
-                        <div class="resource-card critical">
-                            <div class="rc-head">
-                                <span class="rc-num">21</span>
-                                <span class="text-red">NISKI POZIOM</span>
+                        <div class="res-card critical">
+                            <div class="res-head">
+                                <strong>NR 21</strong>
+                                <span class="status-bad">NISKI POZIOM</span>
                             </div>
                             <p>Najsłabsze ogniwo. Wymaga pracy u podstaw. Głęboka rezerwa.</p>
                         </div>
@@ -532,69 +549,65 @@
             </div>
         </section>
 
-        <!-- SKLEP -->
         <section id="shop">
             <div class="container">
                 <div class="section-header reveal">
                     <h2>ZBROJOWNIA</h2>
-                    <div class="orange-line"></div>
+                    <div class="divider"></div>
                 </div>
                 <div class="shop-grid">
                     <div class="shop-item">
-                        <div class="item-img home">HOME</div>
-                        <div class="item-meta">
+                        <div class="item-vis vis-home">HOME</div>
+                        <div class="item-info">
+                            <span class="price">2.00 PLN</span>
                             <h4>JERSEY DOMOWY</h4>
-                            <span class="price">2.00 PLN</span>
+                            <button class="btn-shop">WYBIERZ</button>
                         </div>
-                        <button>PERSONALIZUJ</button>
                     </div>
                     <div class="shop-item">
-                        <div class="item-img away">AWAY</div>
-                        <div class="item-meta">
+                        <div class="item-vis vis-away">AWAY</div>
+                        <div class="item-info">
+                            <span class="price">2.00 PLN</span>
                             <h4>JERSEY WYJAZD</h4>
-                            <span class="price">2.00 PLN</span>
+                            <button class="btn-shop">WYBIERZ</button>
                         </div>
-                        <button>PERSONALIZUJ</button>
                     </div>
                     <div class="shop-item">
-                        <div class="item-img gk">GK WALL</div>
-                        <div class="item-meta">
-                            <h4>BLUZA GK</h4>
+                        <div class="item-vis vis-gk">GK WALL</div>
+                        <div class="item-info">
                             <span class="price">2.00 PLN</span>
+                            <h4>BLUZA GK</h4>
+                            <button class="btn-shop">WYBIERZ</button>
                         </div>
-                        <button>PERSONALIZUJ</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- HISTORIA -->
         <section id="history">
             <div class="container reveal">
                 <div class="history-box">
                     <div class="h-score">0:2</div>
                     <div class="h-content">
                         <h3>RACHUNKI DO WYRÓWNANIA</h3>
-                        <p>Pamiętamy finał. W tym roku idziemy po złoto.</p>
+                        <p>Zeszłoroczny finał. Pamiętamy ten wynik. W tym roku idziemy po złoto.</p>
                         <div class="memorial">
-                            <strong>KABANOS:</strong> Hołd dla poległego zawodnika. Pamiętamy.
+                            <strong>GENEZA KABANOS:</strong> Hołd dla poległego zawodnika.
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 LOS KABANOS.</p>
+            <p>&copy; 2025 LOS KABANOS WARSZAWA.</p>
         </div>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Hamburger
             const hamburger = document.querySelector('.hamburger');
             const navLinks = document.querySelector('.nav-links');
             
@@ -608,7 +621,6 @@
                 });
             });
 
-            // Animacja pojawiania się
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
@@ -621,11 +633,10 @@
             document.querySelectorAll('.reveal').forEach((el) => {
                 el.style.opacity = 0;
                 el.style.transform = 'translateY(30px)';
-                el.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+                el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
                 observer.observe(el);
             });
 
-            // Klikanie w kropki
             document.querySelectorAll('.dot').forEach(dot => {
                 dot.addEventListener('click', function(e) {
                     const id = this.getAttribute('href').substring(1);
