@@ -1,21 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
     
+    // Hamburger Logic
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     const links = document.querySelectorAll('.nav-links li a');
 
     hamburger.addEventListener('click', () => {
         navLinks.classList.toggle('active');
-        hamburger.classList.toggle('active');
     });
 
     links.forEach(link => {
         link.addEventListener('click', () => {
             navLinks.classList.remove('active');
-            hamburger.classList.remove('active');
         });
     });
 
+    // Reveal Animation
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
@@ -24,9 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, { threshold: 0.1 });
 
-    const hiddenElements = document.querySelectorAll('.reveal');
-    hiddenElements.forEach((el) => observer.observe(el));
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
+    // Player Interaction
     const playerDots = document.querySelectorAll('.player-dot');
     
     playerDots.forEach(dot => {
