@@ -71,6 +71,9 @@ header {
 .nav-links a { font-size: 1.1rem; font-weight: 600; color: #888; padding: 8px 20px; border-radius: 50px; transition: 0.3s; }
 .nav-links a:hover { background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 0 15px rgba(255,255,255,0.1); }
 
+.personnel-link a { color: var(--accent-yellow) !important; border: 1px solid var(--accent-yellow); }
+.personnel-link a:hover { background: var(--accent-yellow) !important; color: #000 !important; box-shadow: 0 0 15px var(--accent-yellow) !important; }
+
 .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 6px; }
 .hamburger .bar { width: 30px; height: 3px; background: var(--accent-orange); border-radius: 3px; }
 
@@ -127,7 +130,7 @@ header {
     border: 1px solid var(--accent-orange); box-shadow: 0 5px 20px rgba(255,69,0,0.1);
 }
 
-/* --- TACTICAL INTEL CONSOLE (NEW STYLING) --- */
+/* --- TACTICAL INTEL CONSOLE --- */
 .tactical-intel { margin-bottom: 50px; margin-top: 50px; }
 .intel-panel {
     background: rgba(10,10,10,0.95);
@@ -282,7 +285,7 @@ header {
 }
 .progress-fill { height: 100%; border-radius: 4px; box-shadow: 0 0 10px currentColor; transition: width 1s ease-out; }
 
-/* Fill Colors based on Card Style */
+/* Fill Colors */
 .style-mvp .progress-fill { background: var(--accent-orange); color: var(--accent-orange); }
 .style-skill .progress-fill { background: var(--accent-purple); color: var(--accent-purple); }
 .style-warn .progress-fill { background: var(--accent-yellow); color: var(--accent-yellow); }
@@ -303,6 +306,90 @@ header {
     border: 1px solid rgba(255,255,255,0.05);
     border-radius: var(--radius-md); padding: 30px;
 }
+
+/* --- SHOP STYLES --- */
+.shop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; margin-bottom: 50px; }
+.shop-item {
+    background: var(--bg-panel); backdrop-filter: var(--glass-blur);
+    border: 1px solid rgba(255,255,255,0.05); border-radius: var(--radius-md);
+    padding: 30px 20px; text-align: center; position: relative;
+    transition: 0.3s; overflow: hidden;
+}
+.shop-item:hover { transform: translateY(-5px); border-color: var(--accent-teal); background: rgba(0,255,204,0.05); }
+
+.shop-icon { font-size: 3rem; margin-bottom: 15px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2)); }
+.shop-item h3 { font-size: 1.4rem; color: #fff; margin-bottom: 8px; }
+.shop-item p { color: #888; font-size: 0.9rem; margin-bottom: 20px; }
+
+.price-tag {
+    display: inline-block; background: var(--accent-teal); color: #000;
+    font-family: var(--font-head); font-weight: 700; font-size: 1.5rem;
+    padding: 5px 15px; border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0,255,204,0.4);
+}
+
+.shop-item.special { border: 1px solid var(--accent-purple); background: linear-gradient(135deg, rgba(191,0,255,0.1), transparent); }
+.shop-item.special .price-tag { background: var(--accent-purple); color: #fff; box-shadow: 0 0 15px rgba(191,0,255,0.4); }
+
+/* --- ROTATION PANEL --- */
+.rotation-panel {
+    background: rgba(10,10,10,0.8); border: 1px solid #333;
+    border-radius: var(--radius-md); padding: 30px;
+    font-family: var(--font-mono); position: relative;
+}
+.rotation-panel::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(0,0,0,0.5) 1px, rgba(0,0,0,0.5) 2px);
+    pointer-events: none; opacity: 0.3;
+}
+.rotation-msg h3 { color: var(--accent-orange); margin-bottom: 20px; letter-spacing: 2px; }
+.rotation-msg p { color: #ccc; margin-bottom: 10px; font-size: 1rem; }
+
+.custom-option { display: flex; align-items: center; gap: 10px; margin: 10px 0 20px 0; cursor: pointer; font-size: 0.9rem; color: #aaa; justify-content: center; }
+.custom-option input { accent-color: var(--accent-orange); }
+
+/* --- MODAL & PIN --- */
+.modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9); z-index: 2000;
+    display: flex; justify-content: center; align-items: center;
+    backdrop-filter: blur(10px);
+}
+.modal.hidden { display: none; }
+.modal-content {
+    background: #111; border: 1px solid #333; padding: 40px;
+    border-radius: var(--radius-md); text-align: center; position: relative;
+    max-width: 400px; width: 90%; box-shadow: 0 0 50px rgba(0,0,0,0.8);
+}
+.close-modal { position: absolute; top: 15px; right: 20px; font-size: 2rem; cursor: pointer; color: #555; }
+.close-modal:hover { color: #fff; }
+
+.pin-pad { margin-top: 20px; }
+#pin-input {
+    width: 100%; padding: 15px; font-size: 2rem; text-align: center;
+    background: #000; border: 1px solid #333; color: #fff; margin-bottom: 20px; letter-spacing: 10px; font-family: var(--font-mono);
+}
+.keys { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.key {
+    padding: 15px; background: #222; border: 1px solid #333; color: #fff; font-size: 1.2rem;
+    cursor: pointer; border-radius: 8px; transition: 0.2s;
+}
+.key:hover { background: #333; border-color: #555; }
+.key:active { background: var(--accent-orange); color: #000; }
+
+/* SECURE VIEW */
+#secure-view { position: relative; }
+.watermark {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 4rem; color: rgba(255,255,255,0.03); font-weight: 900; pointer-events: none; white-space: nowrap;
+}
+.secure-status { margin: 20px 0; }
+.loader {
+    width: 40px; height: 40px; border: 3px solid #333; border-top-color: var(--accent-teal);
+    border-radius: 50%; margin: 0 auto 15px auto; animation: spin 1s linear infinite;
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+.secure-msg { font-size: 0.9rem; color: #777; border-top: 1px dashed #333; padding-top: 20px; }
 
 /* --- TIMELINE --- */
 .timeline { position: relative; padding-left: 30px; border-left: 2px solid rgba(255,255,255,0.1); margin-top: 30px; }
