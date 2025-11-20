@@ -10,321 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300;500;700&family=Barlow:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-    <style>
-        /* --- 1. ZMIENNE I KONFIGURACJA --- */
-        :root {
-            --bg-deep: #050505;
-            --bg-panel: #111111;
-            --bg-card: #161616;
-            
-            /* Akcenty */
-            --accent-orange: #ff4500;
-            --accent-blue: #00a8ff;
-            --accent-purple: #bf00ff;
-            --accent-yellow: #ffd700; /* Kolor Zagrożenia */
-            --accent-red: #ff2e2e;
-            --accent-teal: #00ffcc;
-            
-            /* UI */
-            --border-color: #333;
-            --radius-lg: 30px;
-            --radius-md: 20px;
-            --radius-sm: 10px;
-            --shadow-glow: 0 0 25px rgba(255, 69, 0, 0.3);
-            
-            --font-head: 'Teko', sans-serif;
-            --font-body: 'Barlow', sans-serif;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-
-        body {
-            background-color: var(--bg-deep);
-            color: #f0f0f0;
-            font-family: var(--font-body);
-            overflow-x: hidden;
-            
-            /* Matowy Carbon Pattern */
-            background-image: 
-                linear-gradient(45deg, #0a0a0a 25%, transparent 25%, transparent 75%, #0a0a0a 75%, #0a0a0a),
-                linear-gradient(45deg, #0a0a0a 25%, transparent 25%, transparent 75%, #0a0a0a 75%, #0a0a0a);
-            background-position: 0 0, 10px 10px;
-            background-size: 20px 20px;
-        }
-
-        .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-        a { text-decoration: none; color: inherit; transition: 0.3s; }
-        section { padding: 70px 0; position: relative; }
-
-        h1, h2, h3, h4 { font-family: var(--font-head); text-transform: uppercase; line-height: 1; letter-spacing: 1px; margin: 0; }
-
-        /* --- 2. HEADER --- */
-        header {
-            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-            background: rgba(5, 5, 5, 0.9);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid #333;
-            padding: 15px 0;
-            border-bottom-left-radius: var(--radius-lg);
-            border-bottom-right-radius: var(--radius-lg);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .navbar { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 2rem; font-weight: 700; letter-spacing: 2px; }
-        .logo span { color: var(--accent-orange); text-shadow: 0 0 10px rgba(255,69,0,0.4); }
-
-        .nav-links { display: flex; gap: 25px; list-style: none; }
-        .nav-links a { font-size: 1.1rem; font-weight: 600; color: #888; padding: 8px 20px; border-radius: 50px; transition: 0.3s; }
-        .nav-links a:hover { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid #333; }
-
-        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 6px; }
-        .hamburger .bar { width: 30px; height: 3px; background: var(--accent-orange); border-radius: 3px; }
-
-        /* --- 3. HERO (FIX BUTTON GLOW) --- */
-        #hero {
-            min-height: 90vh; display: flex; align-items: center; justify-content: center; text-align: center;
-            background: radial-gradient(circle, rgba(255,69,0,0.05) 0%, transparent 60%);
-            padding-top: 80px;
-        }
-        .hero-content { padding-bottom: 60px; /* Miejsce na cień przycisku */ }
-
-        .hero-tag { 
-            border: 1px solid var(--accent-orange); color: var(--accent-orange); 
-            padding: 8px 20px; border-radius: 50px; font-weight: 700; font-size: 0.9rem; display: inline-block; margin-bottom: 20px;
-            box-shadow: 0 0 15px rgba(255,69,0,0.1);
-        }
-        #hero h1 { font-size: 5.5rem; font-weight: 500; line-height: 0.9; margin-bottom: 25px; }
-        .outline { -webkit-text-stroke: 1px #fff; color: transparent; font-weight: 700; }
-        
-        /* Przycisk z poprawionym cieniem */
-        .btn-primary {
-            display: inline-block; padding: 18px 50px; background: var(--accent-orange); color: #000;
-            font-family: var(--font-head); font-size: 1.6rem; font-weight: 700; margin-top: 30px;
-            border-radius: 50px; 
-            box-shadow: 0 0 30px rgba(255, 69, 0, 0.4), 0 0 10px rgba(255, 69, 0, 0.8); /* Realistyczny glow */
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 1;
-            border: 2px solid var(--accent-orange);
-        }
-        .btn-primary:hover { 
-            background: transparent; color: var(--accent-orange); 
-            box-shadow: 0 0 50px rgba(255, 69, 0, 0.6), inset 0 0 20px rgba(255, 69, 0, 0.2);
-            transform: scale(1.05);
-        }
-
-        /* --- 4. ARENY --- */
-        .section-header { text-align: center; margin-bottom: 50px; }
-        .section-header h2 { font-size: 3.5rem; text-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .divider { width: 80px; height: 4px; background: var(--accent-orange); margin: 15px auto; border-radius: 10px; box-shadow: 0 0 10px rgba(255,69,0,0.5); }
-
-        .arenas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
-        .arena-box {
-            background: var(--bg-panel); border: 1px solid var(--border-color); padding: 25px; text-align: center;
-            border-radius: var(--radius-md); transition: 0.3s;
-        }
-        .arena-box:hover { transform: translateY(-5px); border-color: var(--accent-orange); background: #181818; }
-        .main-arena { 
-            grid-column: span 2; background: linear-gradient(135deg, #1a1a1a, #0e0e0e); 
-            border: 1px solid var(--accent-orange); box-shadow: 0 5px 20px rgba(255,69,0,0.1);
-        }
-        .arena-box .icon { font-size: 2.2rem; margin-bottom: 10px; display: block; }
-        .retired { opacity: 0.3; border-style: dashed; filter: grayscale(1); }
-
-        /* --- 5. SKŁAD (BOISKO I KARTY) --- */
-        .alert-banner {
-            background: rgba(255,215,0,0.05); border: 1px solid var(--accent-yellow); border-radius: var(--radius-md);
-            padding: 15px; margin-bottom: 40px; text-align: center; color: var(--accent-yellow); font-weight: 600;
-            letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem;
-        }
-
-        .squad-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; }
-
-        /* Responsywne Boisko */
-        .field-zone { position: relative; width: 100%; height: 550px; }
-        .rink-matte {
-            width: 100%; height: 100%; background: #121212; border: 4px solid #333;
-            border-radius: 50px; position: relative; overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.7);
-        }
-        .rink-lines { position: absolute; top: 50%; width: 100%; height: 2px; background: #333; transform: translateY(-50%); }
-        .crease {
-            position: absolute; width: 80px; height: 40px; left: 50%; transform: translateX(-50%);
-            border: 2px solid var(--accent-orange); background: rgba(255,69,0,0.1);
-        }
-        .crease.top { top: 0; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; border-top: none; }
-        .crease.bottom { bottom: 0; border-top-left-radius: 30px; border-top-right-radius: 30px; border-bottom: none; }
-
-        /* Kropki */
-        .dot {
-            position: absolute; width: 48px; height: 48px;
-            background: #222; border: 2px solid #fff; border-radius: 50%;
-            display: flex; justify-content: center; align-items: center;
-            font-family: var(--font-head); font-size: 1.5rem; font-weight: 700; color: #fff;
-            transform: translate(-50%, -50%); cursor: pointer; z-index: 10; transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.6);
-        }
-        .dot:hover { transform: translate(-50%, -50%) scale(1.2); z-index: 20; }
-
-        /* Kolory Kropek */
-        .dot-mvp { border-color: var(--accent-orange); color: var(--accent-orange); }
-        .dot-mvp:hover { background: var(--accent-orange); color: #000; box-shadow: 0 0 20px var(--accent-orange); }
-        
-        .dot-skill { border-color: var(--accent-purple); color: var(--accent-purple); }
-        .dot-skill:hover { background: var(--accent-purple); color: #fff; }
-
-        .dot-warn { border-color: var(--accent-yellow); color: var(--accent-yellow); }
-        .dot-warn:hover { background: var(--accent-yellow); color: #000; box-shadow: 0 0 20px var(--accent-yellow); }
-        
-        .dot-teal { border-color: var(--accent-teal); color: var(--accent-teal); }
-        .dot-teal:hover { background: var(--accent-teal); color: #000; }
-
-        .pos-gk { top: 90%; left: 50%; border-radius: 8px; width: 45px; height: 25px; font-size: 1rem; background: #000; border-color: #444; cursor: default; }
-        .pos-ld { top: 70%; left: 25%; }
-        .pos-rd { top: 70%; left: 75%; }
-        .pos-c  { top: 50%; left: 50%; width: 65px; height: 65px; font-size: 2rem; background: #161616; }
-        .pos-la { top: 25%; left: 25%; }
-        .pos-ra { top: 25%; left: 75%; }
-
-        /* Karty Graczy */
-        .cards-zone { display: flex; flex-direction: column; gap: 15px; }
-
-        .player-card {
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            border-radius: var(--radius-md); position: relative; overflow: hidden;
-            transition: 0.3s; scroll-margin-top: 120px;
-        }
-        .player-card:hover { transform: translateX(5px); border-color: #666; background: #202020; }
-        .player-card.highlight { transform: scale(1.02); box-shadow: 0 0 30px rgba(255,255,255,0.15); z-index: 5; border-color: #fff; }
-
-        /* Style Kolorystyczne Kart */
-        .style-mvp { border-left: 4px solid var(--accent-orange); }
-        .style-mvp h3 { color: var(--accent-orange); }
-        .style-mvp .progress-fill { background: var(--accent-orange); box-shadow: 0 0 10px var(--accent-orange); }
-        
-        .style-skill { border-left: 4px solid var(--accent-purple); }
-        .style-skill h3 { color: var(--accent-purple); }
-        .style-skill .progress-fill { background: var(--accent-purple); }
-        
-        .style-warn { border-left: 4px solid var(--accent-yellow); }
-        .style-warn h3 { color: var(--accent-yellow); }
-        .style-warn .progress-fill { background: var(--accent-yellow); }
-        
-        .style-teal { border-left: 4px solid var(--accent-teal); }
-        .style-teal h3 { color: var(--accent-teal); }
-
-        .card-content { padding: 25px; display: flex; align-items: center; gap: 25px; }
-        .card-num { font-family: var(--font-head); font-size: 4rem; font-weight: 700; color: #333; line-height: 0.8; }
-        .style-mvp .card-num { color: var(--accent-orange); opacity: 0.8; }
-        
-        .card-info { flex: 1; min-width: 0; }
-        .card-info h3 { font-size: 1.6rem; margin-bottom: 8px; color: #fff; }
-        .card-info p { font-size: 1rem; color: #aaa; line-height: 1.5; word-wrap: break-word; }
-        
-        .stat-bar { margin-top: 12px; }
-        .stat-label { font-size: 0.75rem; color: #777; font-weight: 700; display: block; margin-bottom: 4px; }
-        .progress-track { width: 100%; height: 6px; background: #2a2a2a; border-radius: 10px; }
-        .progress-fill { height: 100%; border-radius: 10px; }
-
-        /* --- 6. HIERARCHIA (MATRYCA) --- */
-        .matrix-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px;
-        }
-        .matrix-col {
-            background: var(--bg-panel); border: 1px solid var(--border-color);
-            border-radius: var(--radius-md); padding: 30px; display: flex; flex-direction: column;
-        }
-        .col-full { grid-column: 1 / -1; }
-        
-        .col-head { font-family: var(--font-head); font-size: 1.6rem; border-bottom: 2px solid #333; margin-bottom: 25px; color: #ccc; }
-
-        /* Sloty */
-        .h-slot {
-            background: #0e0e0e; padding: 15px; margin-bottom: 12px; border-radius: var(--radius-sm);
-            display: flex; align-items: center; gap: 15px; border: 1px solid #222;
-        }
-        
-        /* Kolory Slotów */
-        .h-slot.unstable { border-left: 4px solid var(--accent-yellow); } /* Zagrożony */
-        .h-slot.equal { border-left: 4px solid #666; }
-        
-        .h-badge { 
-            font-family: var(--font-head); font-size: 1.8rem; width: 40px; text-align: center; color: #fff; 
-            background: #222; border-radius: 6px; line-height: 1.8rem; padding-top: 4px;
-        }
-        .unstable .h-badge { color: var(--accent-yellow); }
-
-        .h-desc { flex: 1; }
-        .h-desc strong { display: block; font-size: 1rem; color: #fff; margin-bottom: 2px; }
-        .h-desc small { font-size: 0.8rem; color: #777; }
-        .unstable .h-desc strong { color: var(--accent-yellow); }
-
-        .future-note { text-align: center; color: #555; font-size: 0.85rem; margin-top: auto; padding-top: 20px; font-style: italic; border-top: 1px dashed #222; }
-        
-        .divider-arrow { text-align: center; font-size: 1.5rem; color: #444; margin: 10px 0; }
-
-        /* Rezerwa */
-        .res-card { background: #0f0f0f; padding: 20px; border-radius: var(--radius-sm); margin-bottom: 15px; border: 1px solid #252525; }
-        .res-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid #222; padding-bottom: 8px; }
-        .res-head strong { font-size: 1.4rem; font-family: var(--font-head); color: #fff; }
-        
-        .status-ok { color: var(--accent-blue); font-weight: 700; font-size: 0.85rem; background: rgba(0, 168, 255, 0.1); padding: 2px 8px; border-radius: 4px; }
-        .status-bad { color: var(--accent-red); font-weight: 700; font-size: 0.85rem; background: rgba(255, 46, 46, 0.1); padding: 2px 8px; border-radius: 4px; }
-        .res-card p { font-size: 0.9rem; color: #999; line-height: 1.5; }
-        .res-card.critical { border-left: 4px solid var(--accent-red); }
-
-        /* --- 7. SKLEP --- */
-        .shop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
-        .shop-item {
-            background: var(--bg-panel); border: 1px solid #333; border-radius: var(--radius-md); overflow: hidden;
-            transition: 0.3s;
-        }
-        .shop-item:hover { border-color: var(--accent-orange); transform: translateY(-5px); }
-        .item-vis {
-            height: 220px; background: #111; display: flex; align-items: center; justify-content: center;
-            font-family: var(--font-head); font-size: 3.5rem; font-weight: 700; color: #222; letter-spacing: 5px;
-        }
-        .vis-home { background: linear-gradient(135deg, #000, #222); }
-        .vis-away { background: linear-gradient(135deg, #222, #444); }
-        .vis-gk { background: linear-gradient(135deg, #001100, #002200); }
-        
-        .item-info { padding: 25px; text-align: center; }
-        .price { color: var(--accent-orange); font-weight: 700; font-size: 1.4rem; display: block; margin: 5px 0 20px 0; }
-        .btn-shop {
-            width: 100%; background: transparent; border: 1px solid #444; color: #fff; padding: 12px; 
-            border-radius: 50px; cursor: pointer; font-weight: 600; transition: 0.2s; font-family: var(--font-head); font-size: 1.2rem;
-        }
-        .btn-shop:hover { background: var(--accent-orange); border-color: var(--accent-orange); color: #000; }
-
-        /* --- 8. HISTORIA --- */
-        .history-box {
-            border: 1px solid var(--accent-red); background: rgba(255, 46, 46, 0.05); padding: 40px;
-            border-radius: var(--radius-md); display: flex; align-items: center; gap: 40px;
-        }
-        .h-score { font-family: var(--font-head); font-size: 6rem; color: var(--accent-red); line-height: 1; text-shadow: 0 0 30px rgba(255, 46, 46, 0.3); }
-        .memorial { margin-top: 20px; padding-left: 20px; border-left: 4px solid #fff; font-size: 1rem; color: #ccc; }
-
-        footer { text-align: center; padding: 50px; color: #555; font-size: 0.9rem; margin-top: 60px; border-top: 1px solid #222; }
-
-        /* --- RESPONSYWNOŚĆ (MOBILE) --- */
-        @media (max-width: 900px) {
-            #hero h1 { font-size: 4rem; }
-            .squad-layout { grid-template-columns: 1fr; }
-            .field-zone { height: 420px; margin-bottom: 30px; }
-            .dot { width: 40px; height: 40px; font-size: 1.1rem; }
-            
-            .history-box { flex-direction: column; text-align: center; }
-            .h-score { font-size: 5rem; }
-            
-            .hamburger { display: flex; z-index: 1001; }
-            .nav-links { 
-                position: fixed; top: 0; right: -100%; height: 100vh; width: 80%; 
-                background: #0e0e0e; flex-direction: column; justify-content: center; 
-                z-index: 999; border-left: 2px solid var(--accent-orange); transition: 0.4s; 
-            }
-            .nav-links.active { right: 0; }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -335,7 +21,7 @@
                 <li><a href="#arenas">DYSCYPLINY</a></li>
                 <li><a href="#squad">TAKTYKA</a></li>
                 <li><a href="#hierarchy">MATRYCA</a></li>
-                <li><a href="#shop">SKLEP</a></li>
+                <li><a href="#history">HISTORIA</a></li>
             </ul>
             <div class="hamburger">
                 <div class="bar"></div>
@@ -348,7 +34,11 @@
     <main>
         <section id="hero">
             <div class="hero-content reveal">
-                <div class="hero-tag">SEZON ZEMSTY</div>
+                <div class="match-countdown">
+                    <span class="label">NEXT MISSION TARGET</span>
+                    <span class="date">LUTY 2026</span>
+                    <span class="status">OCZEKIWANIE NA DANE</span>
+                </div>
                 <h1>DOMINACJA<br><span class="outline">TOTALNA</span></h1>
                 <p>Jeden cel. Żadnych jeńców.</p>
                 <a href="#squad" class="btn-primary">ZOBACZ RAPORT</a>
@@ -379,12 +69,29 @@
         <section id="squad">
             <div class="container">
                 <div class="section-header reveal">
-                    <h2>RAPORT BOISKOWY</h2>
-                    <div class="hero-tag" style="margin:0;">19.11.2025</div>
+                    <h2>RAPORT OPERACYJNY</h2>
+                    <div class="hero-tag" style="margin:0;">AKTUALIZACJA: 20.11.2025</div>
                 </div>
 
                 <div class="alert-banner reveal">
                     ⚠️ STATUS: <strong>EKSPERYMENTALNY</strong>
+                </div>
+
+                <!-- Sekcja Analizy Taktycznej -->
+                <div class="tactical-intel reveal">
+                    <h3>ANALIZA ROTACJI KADROWEJ</h3>
+                    <div class="intel-grid">
+                        <div class="intel-box warning">
+                            <h4>KONFLIKT: PRAWY ATAK</h4>
+                            <p><strong>#08 (PHANTOM)</strong> wywiera presję na <strong>#10 (FLASH)</strong>.</p>
+                            <div class="arrow-down">⬇</div>
+                            <p>Możliwe przesunięcie <strong>#10</strong> na pozycję <strong>Lewa Obrona</strong>.</p>
+                        </div>
+                        <div class="intel-box danger">
+                            <h4>ZAGROŻENIE: LEWA OBRONA</h4>
+                            <p>Jeśli <strong>#10</strong> przejmie pozycję, <strong>#11 (BASTION)</strong> zostaje usunięty ze składu.</p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="squad-layout reveal">
@@ -396,9 +103,9 @@
                             <div class="crease bottom"></div>
                             
                             <a href="#card-9" class="dot pos-la dot-skill">9</a>
-                            <a href="#card-10" class="dot pos-ra dot-warn">10</a> <!-- 10 na boisku, żółta kropka -->
+                            <a href="#card-10" class="dot pos-ra dot-warn">10</a>
                             <a href="#card-6" class="dot pos-c dot-mvp">6</a>
-                            <a href="#card-11" class="dot pos-ld dot-warn">11</a> <!-- 11 na boisku, żółta kropka -->
+                            <a href="#card-11" class="dot pos-ld dot-warn">11</a>
                             <a href="#card-13" class="dot pos-rd dot-teal">13</a>
                             <div class="dot pos-gk">GK</div>
                         </div>
@@ -407,75 +114,205 @@
                     <!-- KARTY ZAWODNIKÓW -->
                     <div class="cards-zone">
                         
-                        <!-- Nr 6 (MVP) -->
+                        <!-- Nr 6 -->
                         <div id="card-6" class="player-card style-mvp">
                             <div class="card-content">
                                 <div class="card-num">06</div>
                                 <div class="card-info">
-                                    <h3>WIRTUOZ (C)</h3>
-                                    <div class="stat-bar">
-                                        <span class="stat-label">DOŚWIADCZENIE (MAX)</span>
-                                        <div class="progress-track"><div class="progress-fill" style="width: 100%"></div></div>
+                                    <h3>COMMANDER (C)</h3>
+                                    <p>Absolutny lider. Dominuje w każdym aspekcie.</p>
+                                    <div class="stats-container">
+                                        <div class="stat-row">
+                                            <div class="stat-label">TECHNIKA <span class="stat-val">90%</span></div>
+                                            <div class="progress-track"><div class="progress-fill" style="width: 90%"></div></div>
+                                        </div>
+                                        <div class="stat-row">
+                                            <div class="stat-label">SZYBKOŚĆ <span class="stat-val">85%</span></div>
+                                            <div class="progress-track"><div class="progress-fill" style="width: 85%"></div></div>
+                                        </div>
+                                        <div class="stat-row">
+                                            <div class="stat-label">SIŁA <span class="stat-val">95%</span></div>
+                                            <div class="progress-track"><div class="progress-fill" style="width: 95%"></div></div>
+                                        </div>
                                     </div>
-                                    <p>Największe doświadczenie w kadrze. Lider środka pola. Kompletny zestaw umiejętności.</p>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Nr 9 (Skill) -->
+                        <!-- Nr 9 -->
                         <div id="card-9" class="player-card style-skill">
                             <div class="card-content">
                                 <div class="card-num">09</div>
                                 <div class="card-info">
-                                    <h3>MÓZG OPERACJI</h3>
-                                    <div class="stat-bar">
-                                        <span class="stat-label">ROZEGRANIE</span>
-                                        <div class="progress-track"><div class="progress-fill" style="width: 95%"></div></div>
+                                    <h3>OPERATOR</h3>
+                                    <p>Chirurgiczna precyzja i wizja gry.</p>
+                                    <div class="stats-container">
+                                        <div class="stat-row">
+                                            <div class="stat-label">TECHNIKA <span class="stat-val">75%</span></div>
+                                            <div class="progress-track"><div class="progress-fill" style="width: 75%"></div></div>
+                                        </div>
+                                        <div class="stat-row">
+                                            <div class="stat-label">SZYBKOŚĆ <span class="stat-val">90%</span></div>
+                                            <div class="progress-track"><div class="progress-fill" style="width: 90%"></div></div>
+                                        </div>
+                                        <div class="stat-row">
+                                            <div class="stat-label">SIŁA <span class="stat-val">75%</span></div>
+                                            <div class="progress-track"><div class="progress-fill" style="width: 75%"></div></div>
+                                        </div>
                                     </div>
-                                    <p>Specjalista od trudnych piłek. Wykorzystuje spryt i technikę, by otwierać drogę do bramki.</p>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Nr 10 (Nowy Prawy Atak - Zagrożony) -->
+                        <!-- Nr 10 -->
                         <div id="card-10" class="player-card style-warn">
                             <div class="card-content">
                                 <div class="card-num">10</div>
                                 <div class="card-info">
-                                    <h3>DYNAMIKA</h3>
-                                    <div class="stat-bar">
-                                        <span class="stat-label" style="color:var(--accent-yellow)">PEWNOŚĆ POZYCJI: NISKA</span>
-                                        <div class="progress-track"><div class="progress-fill" style="width: 30%; background:var(--accent-yellow)"></div></div>
+                                    <h3>FLASH</h3>
+                                    <p style="color:var(--accent-yellow)">STATUS: NIESTABILNY</p>
+                                    <p>Wysokie ryzyko relokacji na obronę.</p>
+                                    <div class="stats-container">
+                                        <div class="stat-row">
+                                            <div class="stat-label">TECHNIKA <span class="stat-val">50%</span></div>
+                                            <div class="progress-track"><div class="progress-fill" style="width: 50%"></div></div>
+                                        </div>
+                                        <div class="stat-row">
+                                            <div class="stat-label">SZYBKOŚĆ <span class="stat-val">85%</span></div>
+                                            <div class="progress-track"><div class="progress-fill" style="width: 85%"></div></div>
+                                        </div>
+                                        <div class="stat-row">
+                                            <div class="stat-label">SIŁA <span class="stat-val">50%</span></div>
+                                            <div class="progress-track"><div class="progress-fill" style="width: 50%"></div></div>
+                                        </div>
                                     </div>
-                                    <p style="color:var(--accent-yellow); font-weight:700; margin-top:5px;">STATUS: BARDZO NIEPEWNY</p>
-                                    <p>Wstawiony do składu eksperymentalnie. Nr 8 czeka na zmianę w każdej chwili.</p>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Nr 11 (Lewa Obrona - Zagrożona) -->
+                        <!-- Nr 11 -->
                         <div id="card-11" class="player-card style-warn">
                             <div class="card-content">
                                 <div class="card-num">11</div>
                                 <div class="card-info">
-                                    <h3>DEFENSOR</h3>
-                                    <p style="color:var(--accent-yellow); font-weight:700;">STATUS: ZAGROŻONY</p>
-                                    <p>Wymagana korekta techniczna (chwyt oburącz). Pozycja nie jest bezpieczna.</p>
+                                    <h3>BASTION</h3>
+                                    <p style="color:var(--accent-yellow)">STATUS: KRYTYCZNY</p>
+                                    <p>Zagrożony usunięciem ze składu.</p>
+                                    <div class="stats-container">
+                                        <div class="stat-row">
+                                            <div class="stat-label">TECHNIKA <span class="stat-val">50%</span></div>
+                                            <div class="progress-track"><div class="progress-fill" style="width: 50%"></div></div>
+                                        </div>
+                                        <div class="stat-row">
+                                            <div class="stat-label">SZYBKOŚĆ <span class="stat-val">80%</span></div>
+                                            <div class="progress-track"><div class="progress-fill" style="width: 80%"></div></div>
+                                        </div>
+                                        <div class="stat-row">
+                                            <div class="stat-label">SIŁA <span class="stat-val">70%</span></div>
+                                            <div class="progress-track"><div class="progress-fill" style="width: 70%"></div></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Nr 13 (Teal) -->
+                        <!-- Nr 13 -->
                         <div id="card-13" class="player-card style-teal">
                             <div class="card-content">
                                 <div class="card-num">13</div>
                                 <div class="card-info">
-                                    <h3>WOJOWNIK</h3>
-                                    <p>Braki taktyczne nadrabia wielkim sercem. Walczy o każdy centymetr parkietu.</p>
+                                    <h3>BERSERKER</h3>
+                                    <p>Nieustępliwy walczak.</p>
+                                    <div class="stats-container">
+                                        <div class="stat-row">
+                                            <div class="stat-label">TECHNIKA <span class="stat-val">55%</span></div>
+                                            <div class="progress-track"><div class="progress-fill" style="width: 55%"></div></div>
+                                        </div>
+                                        <div class="stat-row">
+                                            <div class="stat-label">SZYBKOŚĆ <span class="stat-val">80%</span></div>
+                                            <div class="progress-track"><div class="progress-fill" style="width: 80%"></div></div>
+                                        </div>
+                                        <div class="stat-row">
+                                            <div class="stat-label">SIŁA <span class="stat-val">55%</span></div>
+                                            <div class="progress-track"><div class="progress-fill" style="width: 55%"></div></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
+                    </div>
+                </div>
+
+                <!-- REZERWY I CHALLENGERZY -->
+                <div class="section-header reveal" style="margin-top: 80px;">
+                    <h3>REZERWY I CHALLENGERZY</h3>
+                </div>
+
+                <div class="cards-zone reveal">
+                    <!-- Nr 8 (Challenger) -->
+                    <div id="card-8" class="player-card style-mystery">
+                        <div class="card-content">
+                            <div class="card-num">08</div>
+                            <div class="card-info">
+                                <h3>PHANTOM</h3>
+                                <p style="color:#fff; font-weight:700;">ROLA: CHALLENGER</p>
+                                <p>Brak danych biometrycznych. Rywalizuje o Prawy Atak.</p>
+                                <div class="no-data-viz">
+                                    <span>[ DATA RESTRICTED ]</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Nr 17 (Rezerwa) -->
+                    <div id="card-17" class="player-card style-res">
+                        <div class="card-content">
+                            <div class="card-num">17</div>
+                            <div class="card-info">
+                                <h3>SENTRY</h3>
+                                <p>Solidna rezerwa.</p>
+                                <div class="stats-container">
+                                    <div class="stat-row">
+                                        <div class="stat-label">TECHNIKA <span class="stat-val">55%</span></div>
+                                        <div class="progress-track"><div class="progress-fill" style="width: 55%"></div></div>
+                                    </div>
+                                    <div class="stat-row">
+                                        <div class="stat-label">SZYBKOŚĆ <span class="stat-val">70%</span></div>
+                                        <div class="progress-track"><div class="progress-fill" style="width: 70%"></div></div>
+                                    </div>
+                                    <div class="stat-row">
+                                        <div class="stat-label">SIŁA <span class="stat-val">40%</span></div>
+                                        <div class="progress-track"><div class="progress-fill" style="width: 40%"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Nr 21 (Rezerwa) -->
+                    <div id="card-21" class="player-card style-res-low">
+                        <div class="card-content">
+                            <div class="card-num">21</div>
+                            <div class="card-info">
+                                <h3>ROOKIE</h3>
+                                <p>Wysoka determinacja, braki techniczne.</p>
+                                <div class="stats-container">
+                                    <div class="stat-row">
+                                        <div class="stat-label">TECHNIKA <span class="stat-val">35%</span></div>
+                                        <div class="progress-track"><div class="progress-fill" style="width: 35%"></div></div>
+                                    </div>
+                                    <div class="stat-row">
+                                        <div class="stat-label">SZYBKOŚĆ <span class="stat-val">30%</span></div>
+                                        <div class="progress-track"><div class="progress-fill" style="width: 30%"></div></div>
+                                    </div>
+                                    <div class="stat-row">
+                                        <div class="stat-label">SIŁA <span class="stat-val">50%</span></div>
+                                        <div class="progress-track"><div class="progress-fill" style="width: 50%"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -497,17 +334,15 @@
                         
                         <div class="h-slot unstable">
                             <div class="h-badge" style="color:var(--accent-yellow)">10</div>
-                            <div class="h-desc"><strong style="color:var(--accent-yellow)">STARTER (CHWILOWY)</strong><small>Wysokie ryzyko zmiany</small></div>
+                            <div class="h-desc"><strong style="color:var(--accent-yellow)">FLASH (TEMP)</strong><small>Wysokie ryzyko zmiany</small></div>
                         </div>
                         
                         <div class="divider-arrow">⬇</div>
                         
                         <div class="h-slot equal">
                             <div class="h-badge">08</div>
-                            <div class="h-desc"><strong>ALTERNATYWA</strong><small>Gotowy do wejścia</small></div>
+                            <div class="h-desc"><strong>PHANTOM</strong><small>Challenger</small></div>
                         </div>
-                        
-                        <div class="future-note">System zmian rotacyjnych i kolejni zawodnicy zostaną dodani wkrótce.</div>
                     </div>
 
                     <!-- Lewa Obrona -->
@@ -515,88 +350,53 @@
                         <div class="col-head">HIERARCHIA: LEWA OBRONA</div>
                         <div class="h-slot unstable">
                             <div class="h-badge" style="color:var(--accent-yellow)">11</div>
-                            <div class="h-desc"><strong style="color:var(--accent-yellow)">STARTER (ZAGROŻONY)</strong><small>Wymagana poprawa</small></div>
+                            <div class="h-desc"><strong style="color:var(--accent-yellow)">BASTION</strong><small>Zagrożony przez #10</small></div>
                         </div>
                         
                         <div class="divider-arrow">⬇</div>
                         
                         <div class="h-slot equal">
                             <div class="h-badge">17</div>
-                            <div class="h-desc"><strong>ZMIENNIK NR 1</strong></div>
-                        </div>
-
-                        <div class="future-note">System zmian rotacyjnych i kolejni zawodnicy zostaną dodani wkrótce.</div>
-                    </div>
-
-                    <!-- Analiza Rezerw -->
-                    <div class="matrix-col col-full">
-                        <div class="col-head">ANALIZA REZERW</div>
-                        
-                        <div class="res-card">
-                            <div class="res-head">
-                                <strong>NR 17</strong>
-                                <span class="status-ok">GOTOWY</span>
-                            </div>
-                            <p>Długi staż treningowy. Solidna opcja defensywna.</p>
-                        </div>
-
-                        <div class="res-card critical">
-                            <div class="res-head">
-                                <strong>NR 21</strong>
-                                <span class="status-bad">NISKI POZIOM</span>
-                            </div>
-                            <p>Jest zdeterminowany i chce walczyć, ale umiejętności techniczne na ten moment nie wystarczają.</p>
+                            <div class="h-desc"><strong>SENTRY</strong><small>Zmiennik</small></div>
                         </div>
                     </div>
 
-                </div>
-            </div>
-        </section>
-
-        <section id="shop">
-            <div class="container">
-                <div class="section-header reveal">
-                    <h2>ZBROJOWNIA</h2>
-                    <div class="divider"></div>
-                </div>
-                <div class="shop-grid">
-                    <div class="shop-item">
-                        <div class="item-vis vis-home">HOME</div>
-                        <div class="item-info">
-                            <span class="price">2.00 PLN</span>
-                            <h4>JERSEY DOMOWY</h4>
-                            <button class="btn-shop">WYBIERZ</button>
-                        </div>
-                    </div>
-                    <div class="shop-item">
-                        <div class="item-vis vis-away">AWAY</div>
-                        <div class="item-info">
-                            <span class="price">2.00 PLN</span>
-                            <h4>JERSEY WYJAZD</h4>
-                            <button class="btn-shop">WYBIERZ</button>
-                        </div>
-                    </div>
-                    <div class="shop-item">
-                        <div class="item-vis vis-gk">GK WALL</div>
-                        <div class="item-info">
-                            <span class="price">2.00 PLN</span>
-                            <h4>BLUZA GK</h4>
-                            <button class="btn-shop">WYBIERZ</button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
 
         <section id="history">
             <div class="container reveal">
-                <div class="history-box">
-                    <div class="h-score">0:2</div>
-                    <div class="h-content">
-                        <h3>RACHUNKI DO WYRÓWNANIA</h3>
-                        <p>Zeszłoroczny finał. Pamiętamy ten wynik. W tym roku idziemy po złoto.</p>
-                        <div class="memorial">
-                            <strong>GENEZA KABANOS:</strong> Hołd dla poległego zawodnika.
+                <div class="section-header">
+                    <h2>OŚ CZASU OPERACJI</h2>
+                    <div class="divider"></div>
+                </div>
+
+                <div class="timeline">
+                    <!-- Wydarzenie Przyszłe -->
+                    <div class="timeline-item future">
+                        <div class="t-date">LUTY 2026</div>
+                        <div class="t-content">
+                            <h3>OPERACJA ZEMSTA</h3>
+                            <p>Przewidywany termin rewanżu. Lokalizacja i przeciwnik niepotwierdzone.</p>
+                        </div>
+                    </div>
+
+                    <!-- Raport 20.11 -->
+                    <div class="timeline-item">
+                        <div class="t-date">20.11.2025</div>
+                        <div class="t-content">
+                            <h3>RAPORT TAKTYCZNY</h3>
+                            <p>Wprowadzenie systemu monitorowania parametrów (Technika, Szybkość, Siła). Identyfikacja konfliktów kadrowych (#10 vs #8).</p>
+                        </div>
+                    </div>
+
+                    <!-- Finał -->
+                    <div class="timeline-item past">
+                        <div class="t-date">2024</div>
+                        <div class="t-content">
+                            <h3>WIELKI FINAŁ</h3>
+                            <p>Porażka 0:2. Początek ery rekonstrukcji.</p>
                         </div>
                     </div>
                 </div>
@@ -610,51 +410,6 @@
         </div>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const hamburger = document.querySelector('.hamburger');
-            const navLinks = document.querySelector('.nav-links');
-            
-            hamburger.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-            });
-            
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navLinks.classList.remove('active');
-                });
-            });
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = 1;
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.reveal').forEach((el) => {
-                el.style.opacity = 0;
-                el.style.transform = 'translateY(30px)';
-                el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-                observer.observe(el);
-            });
-
-            document.querySelectorAll('.dot').forEach(dot => {
-                dot.addEventListener('click', function(e) {
-                    const id = this.getAttribute('href').substring(1);
-                    const card = document.getElementById(id);
-                    if(card) {
-                        document.querySelectorAll('.player-card').forEach(c => c.classList.remove('highlight'));
-                        setTimeout(() => {
-                            card.classList.add('highlight');
-                            setTimeout(() => card.classList.remove('highlight'), 2000);
-                        }, 100);
-                    }
-                });
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
