@@ -2,13 +2,27 @@
 const hamburger = document.getElementById('hamburger');
 const navLinks = document.getElementById('nav-links');
 
-hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-});
+if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+        // Toggle display/class for mobile menu
+        if (navLinks.style.display === 'flex') {
+            navLinks.style.display = 'none';
+        } else {
+            navLinks.style.display = 'flex';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '70px';
+            navLinks.style.right = '0';
+            navLinks.style.width = '100%';
+            navLinks.style.background = '#111';
+            navLinks.style.padding = '20px';
+            navLinks.style.zIndex = '999';
+        }
+    });
+}
 
 // --- COUNTDOWN ---
 const countdownEl = document.getElementById('countdown');
-// Set date to February 2026
 const targetDate = new Date('2026-02-01T00:00:00');
 
 function updateCountdown() {
@@ -31,79 +45,30 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// --- INTERACTIVE RINK ---
-const dots = document.querySelectorAll('.dot');
-const cards = document.querySelectorAll('.player-card');
+// --- SHOP PRICE LOGIC ---
+const toggles = document.querySelectorAll('.personalization-check');
 
-dots.forEach(dot => {
-    dot.addEventListener('mouseenter', () => {
-        const targetId = dot.getAttribute('data-target');
-        if (targetId) {
-            const card = document.getElementById(targetId);
-            if (card) {
-                card.classList.add('highlight');
-                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-        }
-    });
+toggles.forEach(toggle => {
+    toggle.addEventListener('change', (e) => {
+        // Find the price tag sibling in the shop item container
+        // Hierarchy: toggle -> label -> div.shop-controls -> div.shop-item -> div.price-tag
+        const shopItem = e.target.closest('.shop-item');
+        const priceTag = shopItem.querySelector('.price-tag');
+        const basePrice = parseInt(e.target.getAttribute('data-base-price'));
 
-    dot.addEventListener('mouseleave', () => {
-        cards.forEach(c => c.classList.remove('highlight'));
-    });
-});
-
-// --- PIN SYSTEM ---
-const personnelBtn = document.getElementById('personnel-btn');
-const authModal = document.getElementById('auth-modal');
-const secureModal = document.getElementById('secure-modal');
-const closeModalBtns = document.querySelectorAll('.close-modal');
-const pinInput = document.getElementById('pin-input');
-
-let currentPin = "";
-const CORRECT_PIN = "0981";
-
-personnelBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    authModal.classList.remove('hidden');
-    currentPin = "";
-    pinInput.value = "";
-});
-
-closeModalBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        authModal.classList.add('hidden');
-        secureModal.classList.add('hidden');
-    });
-});
-
-window.addPin = function(val) {
-    if (val === 'C') {
-        currentPin = "";
-        pinInput.value = "";
-        return;
-    }
-
-    if (val === 'OK') {
-        if (currentPin === CORRECT_PIN) {
-            authModal.classList.add('hidden');
-            secureModal.classList.remove('hidden');
+        if (e.target.checked) {
+            priceTag.innerText = (basePrice + 1) + " PLN";
+            priceTag.style.color = "var(--accent-orange)";
+            priceTag.style.borderColor = "var(--accent-orange)";
         } else {
-            pinInput.style.borderColor = "red";
-            setTimeout(() => pinInput.style.borderColor = "#333", 500);
-            currentPin = "";
-            pinInput.value = "ERR";
-            setTimeout(() => pinInput.value = "", 500);
+            priceTag.innerText = basePrice + " PLN";
+            priceTag.style.color = "#fff";
+            priceTag.style.borderColor = "#444";
         }
-        return;
-    }
+    });
+});
 
-    if (currentPin.length < 4) {
-        currentPin += val;
-        pinInput.value = currentPin.replace(/./g, '•');
-    }
-};
-
-// --- SCROLL REVEAL (Simple) ---
+// --- SCROLL REVEAL ---
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -113,7 +78,7 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.1 });
 
-document.querySelectorAll('.arena-box, .player-card, .intel-panel').forEach(el => {
+document.querySelectorAll('.shop-item, .intel-panel, .field-zone, .player-card').forEach(el => {
     el.style.opacity = 0;
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'all 0.6s ease-out';

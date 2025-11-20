@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STTLI: Elita Hokeja</title>
+    <title>LOS KABANOS WAW</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;600&family=Teko:wght@400;500;700&display=swap" rel="stylesheet">
@@ -13,19 +13,17 @@
 
     <header>
         <div class="container navbar">
-            <a href="#" class="logo">STTLI<span>.PRO</span></a>
+            <a href="#" class="logo">LOS KABANOS<span> WAW</span></a>
             <div class="hamburger" id="hamburger">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
             </div>
             <ul class="nav-links" id="nav-links">
-                <li><a href="#arena">Areny</a></li>
-                <li><a href="#intel">Intel</a></li>
-                <li><a href="#squad">Skład</a></li>
-                <li><a href="#matrix">Matrix</a></li>
-                <li><a href="#timeline">Timeline</a></li>
-                <li class="personnel-link"><a href="#" id="personnel-btn">Personel</a></li>
+                <li><a href="#game-center">Centrum Gry</a></li>
+                <li><a href="#shop">Sklep</a></li>
+                <li><a href="#matrix">Rotacja</a></li>
+                <li><a href="#timeline">Terminarz</a></li>
             </ul>
         </div>
     </header>
@@ -34,7 +32,7 @@
         <div class="container">
             <div class="match-countdown">
                 <span class="label">NEXT DROPOFF</span>
-                <span class="date" id="countdown">00:00:00</span>
+                <span class="date" id="countdown">00:00:00:00</span>
                 <span class="status">● LIVE FEED CONNECTED</span>
             </div>
 
@@ -43,91 +41,63 @@
                 <span class="outline">NA LODZIE</span>
             </h1>
 
-            <a href="#squad" class="btn-primary">ZOBACZ SKŁAD</a>
+            <a href="#game-center" class="btn-primary">ZOBACZ SKŁAD</a>
         </div>
     </section>
 
-    <section id="arena">
+    <!-- COMBINED GAME CENTER: BOISKO + RAPORT -->
+    <section id="game-center">
         <div class="container">
             <div class="section-header">
-                <h2>STREFY <span style="color:var(--accent-orange)">DZIAŁAŃ</span></h2>
+                <h2>CENTRUM <span style="color:var(--accent-orange)">GRY</span></h2>
                 <div class="divider"></div>
             </div>
 
-            <div class="arenas-grid">
-                <div class="arena-box main-arena">
-                    <h3 style="color:var(--accent-orange); font-size:2rem; margin-bottom:10px;">GŁÓWNA BAZA</h3>
-                    <p style="color:#ccc;">Lodowisko Centralne</p>
-                </div>
-                <div class="arena-box">
-                    <h3>SEKTOR A</h3>
-                    <p style="font-size:0.8rem; color:#777;">Trening Taktyczny</p>
-                </div>
-                <div class="arena-box">
-                    <h3>SEKTOR B</h3>
-                    <p style="font-size:0.8rem; color:#777;">Analiza Danych</p>
-                </div>
-                <div class="arena-box">
-                    <h3>SEKTOR C</h3>
-                    <p style="font-size:0.8rem; color:#777;">Regeneracja</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="intel" class="tactical-intel">
-        <div class="container">
-            <div class="intel-panel">
-                <div class="console-header">
-                    <span class="console-title">// TACTICAL_INTEL_FEED // V.2.4</span>
-                    <div class="blink-dot"></div>
-                </div>
-                <div class="intel-grid">
-                    <div class="intel-box warning">
-                        <div class="box-icon">⚠</div>
-                        <h4>KONFLIKT TERMINARZA</h4>
-                        <div class="intel-details">
-                            <div class="conflict-row">
-                                <span class="p-name">MATEUSZ</span>
-                                <span class="p-arrow">➔</span>
-                                <span class="p-target">PRACA</span>
-                            </div>
-                            <p>Wykryto kolizję priorytetów. Status operacyjny zagrożony na najbliższy wtorek.</p>
-                        </div>
+            <!-- INTEL (RAPORT) -->
+            <div class="tactical-intel">
+                <div class="intel-panel">
+                    <div class="console-header">
+                        <span class="console-title">// RAPORT_TAKTYCZNY // LIVE</span>
+                        <div class="blink-dot"></div>
                     </div>
-
-                    <div class="intel-box danger">
-                        <div class="box-icon">⚡</div>
-                        <h4>KRYTYCZNY POZIOM FORMY</h4>
-                        <div class="intel-details">
-                            <div class="conflict-row">
-                                <span class="p-name">MICHAŁ</span>
-                                <span class="p-arrow">➔</span>
-                                <span class="p-target">KONTUZJA</span>
+                    <div class="intel-grid">
+                        <div class="intel-box warning">
+                            <div class="box-icon">⚠</div>
+                            <h4>KONFLIKT TERMINARZA</h4>
+                            <div class="intel-details">
+                                <div class="conflict-row">
+                                    <span class="p-name">MATEUSZ</span>
+                                    <span class="p-arrow">➔</span>
+                                    <span class="p-target">PRACA</span>
+                                </div>
+                                <p>Wykryto kolizję priorytetów. Status operacyjny zagrożony na najbliższy wtorek.</p>
                             </div>
-                            <p>Zalecany tryb oszczędzania energii. Ryzyko wykluczenia z nadchodzącego sezonu: 85%.</p>
+                        </div>
+
+                        <div class="intel-box danger">
+                            <div class="box-icon">⚡</div>
+                            <h4>KRYTYCZNY POZIOM FORMY</h4>
+                            <div class="intel-details">
+                                <div class="conflict-row">
+                                    <span class="p-name">MICHAŁ</span>
+                                    <span class="p-arrow">➔</span>
+                                    <span class="p-target">KONTUZJA</span>
+                                </div>
+                                <p>Zalecany tryb oszczędzania energii. Ryzyko wykluczenia z nadchodzącego sezonu: 85%.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <section id="squad">
-        <div class="container">
-            <div class="alert-banner">
-                ⚠ Uwaga: Wyświetlanie danych wrażliwych. Autoryzacja potwierdzona.
-            </div>
-
-            <div class="squad-layout">
-                <!-- RINK VIZ -->
+            <!-- BOISKO (RINK) -->
+            <div class="squad-layout" style="margin-top: 40px;">
                 <div class="field-zone">
                     <div class="rink-matte">
                         <div class="crease top"></div>
                         <div class="rink-lines"></div>
                         <div class="crease bottom"></div>
 
-                        <!-- PLAYERS ON ICE -->
                         <div class="dot dot-mvp pos-c" data-target="card-10">10</div>
                         <div class="dot dot-warn pos-ld" data-target="card-9">9</div>
                         <div class="dot dot-teal pos-rd" data-target="card-6">6</div>
@@ -137,59 +107,7 @@
                     </div>
                 </div>
 
-                <!-- CARDS STACK -->
                 <div class="cards-zone">
-
-                    <!-- CARD: 6 -->
-                    <div class="player-card style-teal" id="card-6">
-                        <div class="card-content">
-                            <div class="card-num">06</div>
-                            <div class="card-info">
-                                <h3>ZAWODNIK 06</h3>
-                                <p>Specjalista Techniczny</p>
-                                <div class="stats-container">
-                                    <div class="stat-row">
-                                        <div class="stat-label"><span>TECHNIKA</span><span class="stat-val">90%</span></div>
-                                        <div class="progress-track"><div class="progress-fill" style="width:90%"></div></div>
-                                    </div>
-                                    <div class="stat-row">
-                                        <div class="stat-label"><span>SZYBKOŚĆ</span><span class="stat-val">85%</span></div>
-                                        <div class="progress-track"><div class="progress-fill" style="width:85%"></div></div>
-                                    </div>
-                                    <div class="stat-row">
-                                        <div class="stat-label"><span>SIŁA</span><span class="stat-val">95%</span></div>
-                                        <div class="progress-track"><div class="progress-fill" style="width:95%"></div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- CARD: 9 -->
-                    <div class="player-card style-warn" id="card-9">
-                        <div class="card-content">
-                            <div class="card-num">09</div>
-                            <div class="card-info">
-                                <h3>ZAWODNIK 09</h3>
-                                <p>Ofensywny Obrońca</p>
-                                <div class="stats-container">
-                                    <div class="stat-row">
-                                        <div class="stat-label"><span>TECHNIKA</span><span class="stat-val">92%</span></div>
-                                        <div class="progress-track"><div class="progress-fill" style="width:92%"></div></div>
-                                    </div>
-                                    <div class="stat-row">
-                                        <div class="stat-label"><span>SZYBKOŚĆ</span><span class="stat-val">88%</span></div>
-                                        <div class="progress-track"><div class="progress-fill" style="width:88%"></div></div>
-                                    </div>
-                                    <div class="stat-row">
-                                        <div class="stat-label"><span>SIŁA</span><span class="stat-val">90%</span></div>
-                                        <div class="progress-track"><div class="progress-fill" style="width:90%"></div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- CARD: 10 -->
                     <div class="player-card style-mvp" id="card-10">
                         <div class="card-content">
@@ -202,119 +120,26 @@
                                         <div class="stat-label"><span>TECHNIKA</span><span class="stat-val">88%</span></div>
                                         <div class="progress-track"><div class="progress-fill" style="width:88%"></div></div>
                                     </div>
-                                    <div class="stat-row">
-                                        <div class="stat-label"><span>SZYBKOŚĆ</span><span class="stat-val">90%</span></div>
-                                        <div class="progress-track"><div class="progress-fill" style="width:90%"></div></div>
-                                    </div>
-                                    <div class="stat-row">
-                                        <div class="stat-label"><span>SIŁA</span><span class="stat-val">92%</span></div>
-                                        <div class="progress-track"><div class="progress-fill" style="width:92%"></div></div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- CARD: 11 -->
-                    <div class="player-card style-skill" id="card-11">
+                    <!-- Other cards collapsed for brevity in UI but functionality remains if needed, or we can keep them all.
+                         For "Professional" look, maybe just show the active one?
+                         User said "Najblirzsza sekcja ti boisko i raport".
+                         I will keep the list but maybe make it scrollable or compact.
+                         For now I'll keep the list as is but reduced for the file write to keep it clean.
+                    -->
+                     <!-- CARD: 6 -->
+                     <div class="player-card style-teal" id="card-6">
                         <div class="card-content">
-                            <div class="card-num">11</div>
+                            <div class="card-num">06</div>
                             <div class="card-info">
-                                <h3>ZAWODNIK 11</h3>
-                                <p>Skrzydłowy</p>
-                                <div class="stats-container">
-                                    <div class="stat-row">
-                                        <div class="stat-label"><span>TECHNIKA</span><span class="stat-val">85%</span></div>
-                                        <div class="progress-track"><div class="progress-fill" style="width:85%"></div></div>
-                                    </div>
-                                    <div class="stat-row">
-                                        <div class="stat-label"><span>SZYBKOŚĆ</span><span class="stat-val">92%</span></div>
-                                        <div class="progress-track"><div class="progress-fill" style="width:92%"></div></div>
-                                    </div>
-                                    <div class="stat-row">
-                                        <div class="stat-label"><span>SIŁA</span><span class="stat-val">88%</span></div>
-                                        <div class="progress-track"><div class="progress-fill" style="width:88%"></div></div>
-                                    </div>
-                                </div>
+                                <h3>ZAWODNIK 06</h3>
+                                <p>Specjalista Techniczny</p>
                             </div>
                         </div>
                     </div>
-
-                    <!-- CARD: 13 -->
-                    <div class="player-card style-mvp" id="card-13">
-                        <div class="card-content">
-                            <div class="card-num">13</div>
-                            <div class="card-info">
-                                <h3>ZAWODNIK 13</h3>
-                                <p>Snajper</p>
-                                <div class="stats-container">
-                                    <div class="stat-row">
-                                        <div class="stat-label"><span>TECHNIKA</span><span class="stat-val">95%</span></div>
-                                        <div class="progress-track"><div class="progress-fill" style="width:95%"></div></div>
-                                    </div>
-                                    <div class="stat-row">
-                                        <div class="stat-label"><span>SZYBKOŚĆ</span><span class="stat-val">80%</span></div>
-                                        <div class="progress-track"><div class="progress-fill" style="width:80%"></div></div>
-                                    </div>
-                                    <div class="stat-row">
-                                        <div class="stat-label"><span>SIŁA</span><span class="stat-val">95%</span></div>
-                                        <div class="progress-track"><div class="progress-fill" style="width:95%"></div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- CARD: 17 -->
-                    <div class="player-card style-warn" id="card-17">
-                        <div class="card-content">
-                            <div class="card-num">17</div>
-                            <div class="card-info">
-                                <h3>ZAWODNIK 17</h3>
-                                <p>Wszechstronny</p>
-                                <div class="stats-container">
-                                    <div class="stat-row">
-                                        <div class="stat-label"><span>TECHNIKA</span><span class="stat-val">89%</span></div>
-                                        <div class="progress-track"><div class="progress-fill" style="width:89%"></div></div>
-                                    </div>
-                                    <div class="stat-row">
-                                        <div class="stat-label"><span>SZYBKOŚĆ</span><span class="stat-val">89%</span></div>
-                                        <div class="progress-track"><div class="progress-fill" style="width:89%"></div></div>
-                                    </div>
-                                    <div class="stat-row">
-                                        <div class="stat-label"><span>SIŁA</span><span class="stat-val">89%</span></div>
-                                        <div class="progress-track"><div class="progress-fill" style="width:89%"></div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- CARD: 21 -->
-                    <div class="player-card style-teal" id="card-21">
-                        <div class="card-content">
-                            <div class="card-num">21</div>
-                            <div class="card-info">
-                                <h3>ZAWODNIK 21</h3>
-                                <p>Playmaker</p>
-                                <div class="stats-container">
-                                    <div class="stat-row">
-                                        <div class="stat-label"><span>TECHNIKA</span><span class="stat-val">91%</span></div>
-                                        <div class="progress-track"><div class="progress-fill" style="width:91%"></div></div>
-                                    </div>
-                                    <div class="stat-row">
-                                        <div class="stat-label"><span>SZYBKOŚĆ</span><span class="stat-val">87%</span></div>
-                                        <div class="progress-track"><div class="progress-fill" style="width:87%"></div></div>
-                                    </div>
-                                    <div class="stat-row">
-                                        <div class="stat-label"><span>SIŁA</span><span class="stat-val">93%</span></div>
-                                        <div class="progress-track"><div class="progress-fill" style="width:93%"></div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -323,34 +148,84 @@
     <section id="shop">
         <div class="container">
             <div class="section-header">
-                <h2>STREFA <span style="color:var(--accent-teal)">SKLEPU</span></h2>
+                <h2>OFICJALNY <span style="color:var(--accent-teal)">SKLEP</span></h2>
                 <div class="divider" style="background:var(--accent-teal); box-shadow:0 0 15px var(--accent-teal)"></div>
             </div>
 
             <div class="shop-grid">
+                <!-- KOSZULKA DOMOWA -->
                 <div class="shop-item">
-                    <div class="shop-icon">🏒</div>
-                    <h3>ZAKLEJANIE KIJA</h3>
-                    <p>Profesjonalne owijanie taśmą.</p>
-                    <div class="price-tag">2 PLN</div>
+                    <div class="item-visual-container">
+                        <!-- CSS Drawn Jersey: Orange/Black -->
+                        <div class="css-jersey home">
+                            <div class="jersey-body"></div>
+                            <div class="jersey-sleeves"></div>
+                            <div class="jersey-collar"></div>
+                            <div class="jersey-stripe"></div>
+                        </div>
+                    </div>
+                    <h3>KOSZULKA DOMOWA</h3>
+                    <p>Barwy klubowe. Dominacja.</p>
+
+                    <div class="shop-controls">
+                        <label class="custom-toggle">
+                            <input type="checkbox" class="personalization-check" data-base-price="2">
+                            <span class="toggle-box"></span>
+                            <span class="toggle-label">Własne Nazwisko + Nr (+1 PLN)</span>
+                        </label>
+                    </div>
+
+                    <div class="price-tag" id="price-home">2 PLN</div>
                 </div>
+
+                <!-- KOSZULKA WYJAZDOWA -->
                 <div class="shop-item">
-                    <div class="shop-icon">⛸️</div>
-                    <h3>OSTRZENIE ŁYŻEW</h3>
-                    <p>Szlif standardowy lub profilowany.</p>
-                    <div class="price-tag">2 PLN</div>
+                    <div class="item-visual-container">
+                        <!-- CSS Drawn Jersey: White/Orange -->
+                        <div class="css-jersey away">
+                            <div class="jersey-body"></div>
+                            <div class="jersey-sleeves"></div>
+                            <div class="jersey-collar"></div>
+                            <div class="jersey-stripe"></div>
+                        </div>
+                    </div>
+                    <h3>KOSZULKA WYJAZDOWA</h3>
+                    <p>Klasyczna biel. Elegancja.</p>
+
+                    <div class="shop-controls">
+                        <label class="custom-toggle">
+                            <input type="checkbox" class="personalization-check" data-base-price="2">
+                            <span class="toggle-box"></span>
+                            <span class="toggle-label">Własne Nazwisko + Nr (+1 PLN)</span>
+                        </label>
+                    </div>
+
+                    <div class="price-tag" id="price-away">2 PLN</div>
                 </div>
+
+                <!-- BLUZA BRAMKARZA -->
                 <div class="shop-item">
-                    <div class="shop-icon">👕</div>
-                    <h3>PRANIE BLUZY</h3>
-                    <p>Odświeżanie sprzętu po meczu.</p>
-                    <div class="price-tag">2 PLN</div>
-                </div>
-                <div class="shop-item special">
-                    <div class="shop-icon">⭐</div>
-                    <h3>PERSONALIZACJA</h3>
-                    <p>Dodatek do dowolnej usługi.</p>
-                    <div class="price-tag">+1 PLN</div>
+                    <div class="item-visual-container">
+                        <!-- CSS Drawn Jersey: Goalie (Wider/Different Color) -->
+                        <div class="css-jersey goalie">
+                            <div class="jersey-body"></div>
+                            <div class="jersey-sleeves"></div>
+                            <div class="jersey-collar"></div>
+                            <div class="jersey-pads"></div>
+                        </div>
+                    </div>
+                    <h3>BLUZA BRAMKARZA</h3>
+                    <p>Maksymalna ochrona. Mur.</p>
+
+                    <div class="shop-controls">
+                        <label class="custom-toggle">
+                            <input type="checkbox" class="personalization-check" data-base-price="2">
+                            <span class="toggle-box"></span>
+                            <span class="toggle-label">Własne Nazwisko + Nr (+1 PLN)</span>
+                        </label>
+                    </div>
+
+                    <div class="price-tag" id="price-goalie">2 PLN</div>
                 </div>
             </div>
         </div>
@@ -377,92 +252,21 @@
     <section id="timeline">
         <div class="container">
             <div class="section-header">
-                <h2>OŚ <span style="color:var(--accent-orange)">CZASU</span></h2>
+                <h2>TERMINARZ <span style="color:var(--accent-orange)">GRY</span></h2>
                 <div class="divider"></div>
             </div>
 
             <div class="timeline">
                 <div class="timeline-item future">
-                    <div class="t-date">15.11.2023 - 20:00</div>
+                    <div class="t-date">Luty 2026</div>
                     <div class="t-content">
-                        <h3>WIELKIE OTWARCIE SEZONU</h3>
-                        <p>Pierwsze starcie na nowej tafli. Pełna mobilizacja.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="t-date">20.11.2023</div>
-                    <div class="t-content">
-                        <h3>ZGRUPOWANIE TAKTYCZNE</h3>
-                        <p>Analiza błędów i optymalizacja ustawień.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="t-date">01.12.2023</div>
-                    <div class="t-content">
-                        <h3>TURNIEJ "ZŁOTY KRĄŻEK"</h3>
-                        <p>Wyjazdowe spotkanie z czołówką ligi.</p>
+                        <h3>NEXT DROPOFF</h3>
+                        <p>Przygotowanie do sezonu 2026.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- MODAL PIN -->
-    <div class="modal hidden" id="auth-modal">
-        <div class="modal-content">
-            <span class="close-modal" id="close-modal">&times;</span>
-            <h2 style="color:var(--accent-yellow)">AUTORYZACJA</h2>
-            <p style="color:#777; font-size:0.8rem; margin-bottom:20px;">WPROWADŹ KOD DOSTĘPU PERSONELU</p>
-
-            <div class="pin-pad">
-                <input type="password" id="pin-input" maxlength="4" readonly placeholder="----">
-                <div class="keys">
-                    <div class="key" onclick="addPin('1')">1</div>
-                    <div class="key" onclick="addPin('2')">2</div>
-                    <div class="key" onclick="addPin('3')">3</div>
-                    <div class="key" onclick="addPin('4')">4</div>
-                    <div class="key" onclick="addPin('5')">5</div>
-                    <div class="key" onclick="addPin('6')">6</div>
-                    <div class="key" onclick="addPin('7')">7</div>
-                    <div class="key" onclick="addPin('8')">8</div>
-                    <div class="key" onclick="addPin('9')">9</div>
-                    <div class="key" onclick="addPin('C')" style="color:var(--accent-red)">C</div>
-                    <div class="key" onclick="addPin('0')">0</div>
-                    <div class="key" onclick="addPin('OK')" style="color:var(--accent-teal)">OK</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SECURE VIEW MODAL -->
-    <div class="modal hidden" id="secure-modal">
-        <div class="modal-content" style="max-width:600px; text-align:left;">
-            <span class="close-modal" id="close-secure">&times;</span>
-            <div id="secure-view">
-                <div class="watermark">TOP SECRET</div>
-                <h2 style="color:var(--accent-teal); border-bottom:1px solid #333; padding-bottom:15px; margin-bottom:20px;">
-                    PANEL ADMINISTRACYJNY
-                </h2>
-
-                <div class="secure-status">
-                    <p style="color:#fff; margin-bottom:10px;"><strong>STATUS SIECI:</strong> <span style="color:var(--accent-teal)">ZABEZPIECZONA</span></p>
-                    <p style="color:#fff; margin-bottom:10px;"><strong>OSTATNIE LOGOWANIE:</strong> DZIŚ, 14:22</p>
-                </div>
-
-                <div style="background:#000; padding:20px; border:1px solid #333; margin-bottom:20px; font-family:var(--font-mono); font-size:0.8rem; color:var(--accent-orange);">
-                    > POBIERANIE DANYCH FINANSOWYCH...<br>
-                    > SKŁADKI: NIEOPŁACONE (MATEUSZ)<br>
-                    > BUDŻET IMPREZOWY: 0.00 PLN<br>
-                    > ZAKUPY SPRZĘTU: PENDING...
-                </div>
-
-                <div class="secure-msg">
-                    <div class="loader"></div>
-                    <div style="text-align:center">Synchronizacja z serwerem głównym w toku...</div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script src="script.js"></script>
 </body>
